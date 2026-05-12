@@ -45,7 +45,7 @@
 
     <releases>
         <release version="0.1.0" date="2026-05-13">
-            <url type="details">https://example.org/changelog.html#version_1.0.1</url>
+            <url type="details">https://github.com/Azakidev/Piccolo/releases/tag/0.1.0</url>
             <description translate="no">
                 <p>Changelog:</p>
                 <ul>
