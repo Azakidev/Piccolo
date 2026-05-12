@@ -13,7 +13,7 @@ use adw::{
 use color::OpaqueColor;
 use std::cell::{OnceCell, RefCell};
 
-use crate::{components::utils::ColorFormat, window::WindowAction};
+use crate::{components::color_functions::ColorFormat, window::WindowAction};
 
 mod imp {
 

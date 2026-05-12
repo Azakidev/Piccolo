@@ -10,3 +10,4 @@ pub mod color_selector;
 pub mod color_box;
 
 pub mod utils;
+pub mod color_functions;

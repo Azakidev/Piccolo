@@ -40,10 +40,8 @@ use strum::IntoEnumIterator;
 
 use crate::{
     components::{
-        color_box::PiccoloColorBox,
-        color_selector::PiccoloColorSelector,
-        color_wheel::PiccoloColorWheel,
-        utils::{ColorFormat, Hsv},
+        color_box::PiccoloColorBox, color_functions::ColorFormat,
+        color_selector::PiccoloColorSelector, color_wheel::PiccoloColorWheel, utils::Hsv,
     },
     config,
 };
@@ -333,11 +331,7 @@ impl WindowAction {
                         sidebar.set_show_sidebar(!sidebar.shows_sidebar());
                     });
 
-                    klass.add_binding_action(
-                        gdk::Key::S,
-                        gdk::ModifierType::CONTROL_MASK,
-                        &action,
-                    );
+                    klass.add_binding_action(gdk::Key::S, gdk::ModifierType::CONTROL_MASK, &action);
                 }
             }
         }
