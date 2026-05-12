@@ -45,7 +45,6 @@ mod imp {
                 h: RefCell::new(0f32),
                 s: RefCell::new(0f32),
                 v: RefCell::new(0f32),
-                ..Default::default()
             }
         }
     }
