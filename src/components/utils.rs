@@ -7,7 +7,7 @@
 
 use std::{any::TypeId, ops::Deref};
 
-use color::{ColorSpace, ColorSpaceLayout, Hsl, Oklab, OpaqueColor, Rgba8, Srgb};
+use color::{ColorSpace, ColorSpaceLayout, Hsl, Hwb, Oklab, Oklch, OpaqueColor, Rgba8, Srgb};
 
 #[derive(Clone, Copy, Debug)]
 pub struct Hsv;
@@ -128,8 +128,16 @@ pub enum ColorFormat {
     Hsl,
     #[strum(to_string = "HSV")]
     Hsv,
+    #[strum(to_string = "HWB")]
+    Hwb,
     #[strum(to_string = "OkLab")]
     Oklab,
+    #[strum(to_string = "OkLch")]
+    Oklch,
+    #[strum(to_string = "CIELab")]
+    Lab,
+    #[strum(to_string = "CIELch")]
+    Lch,
 }
 
 impl Deref for ColorFormat {
@@ -159,10 +167,30 @@ impl ColorFormat {
                 let [h, s, v] = hsv.components;
                 return format!("hsl({:.0}, {:.02}%, {:.02}%)", h, s, v);
             }
+            Self::Hwb => {
+                let hwb: OpaqueColor<Hwb> = hsv.convert();
+                let [h, w, b] = hwb.components;
+                return format!("hsl({:.0}, {:.2}%, {:.2}%)", h, w, b);
+            }
             Self::Oklab => {
                 let oklab: OpaqueColor<Oklab> = hsv.convert();
                 let [l, a, b] = oklab.components;
                 return format!("oklab({:.2}%, {:.2}, {:.2})", 100. * l, a, b);
+            }
+            Self::Oklch => {
+                let oklch: OpaqueColor<Oklch> = hsv.convert();
+                let [l, c, h] = oklch.components;
+                return format!("oklch({:.2}%, {:.2}, {:.2})", 100. * l, c, h);
+            }
+            Self::Lab => {
+                let oklab: OpaqueColor<Oklab> = hsv.convert();
+                let [l, a, b] = oklab.components;
+                return format!("lab({:.2}%, {:.2}, {:.2})", 100. * l, a, b);
+            }
+            Self::Lch => {
+                let lch: OpaqueColor<Oklch> = hsv.convert();
+                let [l, c, h] = lch.components;
+                return format!("lch({:.2}%, {:.2}, {:.2})", 100. * l, c, h);
             }
         }
     }
