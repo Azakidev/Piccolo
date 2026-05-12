@@ -7,7 +7,7 @@
 
 use std::{any::TypeId, ops::Deref};
 
-use color::{ColorSpace, ColorSpaceLayout, Hsl, Hwb, Oklab, Oklch, OpaqueColor, Rgba8, Srgb};
+use color::{ColorSpace, ColorSpaceLayout, Hsl, Hwb, Lab, Lch, Oklab, Oklch, OpaqueColor, Rgba8, Srgb};
 
 #[derive(Clone, Copy, Debug)]
 pub struct Hsv;
@@ -169,8 +169,9 @@ impl ColorFormat {
             }
             Self::Hwb => {
                 let hwb: OpaqueColor<Hwb> = hsv.convert();
-                let [h, w, b] = hwb.components;
-                return format!("hsl({:.0}, {:.2}%, {:.2}%)", h, w, b);
+                let hue = hsv.components[0];
+                let [_h, w, b] = hwb.components;
+                return format!("hwb({:.0}, {:.2}%, {:.2}%)", hue, w, b);
             }
             Self::Oklab => {
                 let oklab: OpaqueColor<Oklab> = hsv.convert();
@@ -179,18 +180,20 @@ impl ColorFormat {
             }
             Self::Oklch => {
                 let oklch: OpaqueColor<Oklch> = hsv.convert();
-                let [l, c, h] = oklch.components;
-                return format!("oklch({:.2}%, {:.2}, {:.2})", 100. * l, c, h);
+                let hue = hsv.components[0];
+                let [l, c, _h] = oklch.components;
+                return format!("oklch({:.2}%, {:.2}, {:.0})", 100. * l, c, hue);
             }
             Self::Lab => {
-                let oklab: OpaqueColor<Oklab> = hsv.convert();
+                let oklab: OpaqueColor<Lab> = hsv.convert();
                 let [l, a, b] = oklab.components;
-                return format!("lab({:.2}%, {:.2}, {:.2})", 100. * l, a, b);
+                return format!("lab({:.2}%, {:.2}, {:.2})", l, a, b);
             }
             Self::Lch => {
-                let lch: OpaqueColor<Oklch> = hsv.convert();
-                let [l, c, h] = lch.components;
-                return format!("lch({:.2}%, {:.2}, {:.2})", 100. * l, c, h);
+                let lch: OpaqueColor<Lch> = hsv.convert();
+                let hue = hsv.components[0];
+                let [l, c, _h] = lch.components;
+                return format!("lch({:.2}%, {:.2}, {:.0})", l, c, hue);
             }
         }
     }
