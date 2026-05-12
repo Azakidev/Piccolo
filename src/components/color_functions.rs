@@ -58,7 +58,7 @@ impl ColorFormat {
             }
             Self::Hsv => {
                 let [h, s, v] = hsv.components;
-                format!("hsl({:.0}, {:.02}%, {:.02}%)", h, s, v)
+                format!("hsv({:.0}, {:.2}%, {:.2}%)", h, s, v)
             }
             Self::Hwb => {
                 let hwb: OpaqueColor<Hwb> = hsv.convert();

@@ -21,7 +21,7 @@ use std::{
     rc::Rc,
 };
 
-use crate::components::utils::Hsv;
+use crate::components::{color_chip::PiccoloColorChip, utils::Hsv};
 
 mod imp {
 
@@ -31,6 +31,8 @@ mod imp {
     #[properties(wrapper_type = super::PiccoloColorSelector)]
     #[template(resource = "/art/FatDawlf/Piccolo/color-selector.ui")]
     pub struct PiccoloColorSelector {
+        #[template_child]
+        pub chip: TemplateChild<PiccoloColorChip>,
         #[template_child]
         pub hex_label: TemplateChild<gtk::Entry>,
         // Sliders
@@ -114,6 +116,7 @@ mod imp {
 
             obj.link_sliders();
             obj.link_hex_label();
+            obj.link_chip();
 
             obj.setup_css_provider();
             obj.update_properties();
@@ -266,6 +269,14 @@ impl PiccoloColorSelector {
                 }
             }
         ));
+    }
+
+    fn link_chip(&self) {
+        let chip = self.imp().chip.get();
+
+        self.bind_property("h", &chip, "h").sync_create().build();
+        self.bind_property("s", &chip, "s").sync_create().build();
+        self.bind_property("v", &chip, "v").sync_create().build();
     }
 
     fn set_hex(&self) {
