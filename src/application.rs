@@ -91,7 +91,7 @@ impl PiccoloApplication {
             .version(VERSION)
             .developers(vec!["FatDawlf https://fatdawlf.art"])
             // Translators: Replace "translator-credits" with your name/username, and optionally an email or URL.
-            .translator_credits(&gettext("translator-credits"))
+            .translator_credits(gettext("translator-credits"))
             .copyright("© 2026 FatDawlf")
             .license_type(gtk::License::MitX11)
             .build();

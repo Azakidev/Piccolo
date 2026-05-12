@@ -17,4 +17,3 @@ const fn default_env(v: Option<&'static str>, default: &'static str) -> &'static
         None => default,
     }
 }
-

@@ -6,17 +6,17 @@
  */
 
 mod application;
+mod components;
 mod config;
 mod window;
-mod components;
 
 use self::application::PiccoloApplication;
 use self::window::PiccoloWindow;
 
 use config::{GETTEXT_PACKAGE, LOCALEDIR, PKGDATADIR};
 use gettextrs::{bind_textdomain_codeset, bindtextdomain, textdomain};
-use gtk::{gio, glib};
 use gtk::prelude::*;
+use gtk::{gio, glib};
 
 fn main() -> glib::ExitCode {
     // Set up gettext translations

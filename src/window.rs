@@ -262,7 +262,7 @@ impl PiccoloWindow {
 }
 
 async fn request_picker() -> ashpd::Result<Color> {
-    Ok(Color::pick().send().await?.response()?)
+    Color::pick().send().await?.response()
 }
 
 #[derive(strum::Display, strum::AsRefStr, strum::EnumIter)]

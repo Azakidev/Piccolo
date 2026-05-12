@@ -8,18 +8,18 @@
 use adw::{prelude::*, subclass::prelude::*};
 use color::OpaqueColor;
 use gtk::{
-    Snapshot,
     gdk::RGBA,
-    glib::{self, Properties, clone},
+    glib::{self, clone, Properties},
     graphene::{Point, Rect},
     gsk::{self, ColorStop, RoundedRect},
+    Snapshot,
 };
 use std::{
     cell::{Cell, RefCell},
     rc::Rc,
 };
 
-use crate::components::utils::{Hsv, to_rgba};
+use crate::components::utils::{to_rgba, Hsv};
 
 const TRACK_WIDTH: f32 = 20f32;
 const TRIANGLE_GAP: f32 = 4f32;
