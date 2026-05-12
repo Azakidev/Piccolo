@@ -37,7 +37,7 @@
             <image>https://raw.githubusercontent.com/Azakidev/Piccolo/refs/heads/main/dist/ss/1.png</image>
             <caption>The main window</caption>
         </screenshot>
-        <screenshot type="default">
+        <screenshot>
             <image>https://raw.githubusercontent.com/Azakidev/Piccolo/refs/heads/main/dist/ss/2.png</image>
             <caption>The main window with the sidebar expanded</caption>
         </screenshot>
