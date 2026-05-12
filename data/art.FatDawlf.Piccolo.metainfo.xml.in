@@ -1,55 +1,58 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component type="desktop-application">
-  <id>art.FatDawlf.Piccolo</id>
-  <metadata_license>CC0-1.0</metadata_license>
-  <project_license>MIT</project_license>
+    <id>art.FatDawlf.Piccolo</id>
+    <metadata_license>CC0-1.0</metadata_license>
+    <project_license>MIT</project_license>
 
-  <name>Piccolo</name>
-  <summary>Color picking with style</summary>
-  <description>
-    <p>Piccolo is an easy to use color picker and selector.</p>
-  </description>
+    <name>Piccolo</name>
+    <summary>Color picking with style</summary>
+    <description>
+        <p>Piccolo is an easy to use color picker and selector, inspired by the venerable gcolor3
+            and a spiritual successor to it using modern tooling and a refined UX.</p>
+        <p>It provides a color wheel, HSV sliders and a hex code input and it allows to quicky copy
+            the selected color as a hex code or any CSS color function in one click.</p>
+    </description>
 
-  <developer id="art.FatDawlf">
-    <name>FatDawlf</name>
-  </developer>
+    <developer id="art.FatDawlf">
+        <name>FatDawlf</name>
+    </developer>
 
-  <url type="homepage">https://github.com/Azakidev/Piccolo</url>
-  <url type="vcs-browser">https://github.com/Azakidev/Piccolo</url>
-  <url type="bugtracker">https://github.com/Azakidev/Piccolo/issues</url>
-  <url type="contact">https://fatdawlf.art</url>
+    <url type="homepage">https://github.com/Azakidev/Piccolo</url>
+    <url type="vcs-browser">https://github.com/Azakidev/Piccolo</url>
+    <url type="bugtracker">https://github.com/Azakidev/Piccolo/issues</url>
+    <url type="contact">https://fatdawlf.art</url>
 
-  <translation type="gettext">piccolo</translation>
-  <launchable type="desktop-id">art.FatDawlf.Piccolo.desktop</launchable>
+    <translation type="gettext">piccolo</translation>
+    <launchable type="desktop-id">art.FatDawlf.Piccolo.desktop</launchable>
 
-  <content_rating type="oars-1.1" />
+    <content_rating type="oars-1.1" />
 
-  <branding>
-    <color type="primary" scheme_preference="light">#23d53c</color>
-    <color type="primary" scheme_preference="dark">#067400</color>
-  </branding>
+    <branding>
+        <color type="primary" scheme_preference="light">#23d53c</color>
+        <color type="primary" scheme_preference="dark">#067400</color>
+    </branding>
 
-  <screenshots>
-    <screenshot type="default">
-      <image>https://raw.githubusercontent.com/Azakidev/Piccolo/refs/heads/main/dist/ss/1.png</image>
-      <caption>The main window</caption>
-    </screenshot>
-    <screenshot type="default">
-      <image>https://raw.githubusercontent.com/Azakidev/Piccolo/refs/heads/main/dist/ss/2.png</image>
-      <caption>The main window with the sidebar expanded</caption>
-    </screenshot>
-  </screenshots>
+    <screenshots>
+        <screenshot type="default">
+            <image>https://raw.githubusercontent.com/Azakidev/Piccolo/refs/heads/main/dist/ss/1.png</image>
+            <caption>The main window</caption>
+        </screenshot>
+        <screenshot type="default">
+            <image>https://raw.githubusercontent.com/Azakidev/Piccolo/refs/heads/main/dist/ss/2.png</image>
+            <caption>The main window with the sidebar expanded</caption>
+        </screenshot>
+    </screenshots>
 
-  <releases>
-    <release version="0.1.0" date="2026-05-16">
-      <url type="details">https://example.org/changelog.html#version_1.0.1</url>
-      <description translate="no">
-        <p>Release description</p>
-        <ul>
-          <li>Initial release</li>
-        </ul>
-      </description>
-    </release>
-  </releases>
+    <releases>
+        <release version="0.1.0" date="2026-05-13">
+            <url type="details">https://example.org/changelog.html#version_1.0.1</url>
+            <description translate="no">
+                <p>Changelog:</p>
+                <ul>
+                    <li>Initial release!</li>
+                </ul>
+            </description>
+        </release>
+    </releases>
 
 </component>

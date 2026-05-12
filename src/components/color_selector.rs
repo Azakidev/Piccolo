@@ -11,10 +11,10 @@ use adw::{
 };
 use color::{AlphaColor, Hsl, OpaqueColor};
 use gtk::{
-    gdk::Display,
-    glib::{self, clone, object::ObjectExt, Properties},
-    prelude::EditableExt,
     CssProvider, TemplateChild,
+    gdk::Display,
+    glib::{self, Properties, clone, object::ObjectExt},
+    prelude::EditableExt,
 };
 use std::{
     cell::{Cell, RefCell},

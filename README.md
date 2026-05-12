@@ -1,5 +1,9 @@
 # Piccolo
 
+<p align="center">
+  <img src="https://raw.githubusercontent.com/Azakidev/Piccolo/refs/heads/main/dist/ss/logo.png" />
+</p>
+
 Piccolo is a color picker built with GTK4 and Libadwaita using the components
 from my other project, [Brush](https://github.com/Azakidev/Brush).
 
@@ -12,13 +16,7 @@ and in this project.
 </p>
 
 ## Features
-- You can pick colors!!!!!!!!!!!!!!!!!!!!!!!!!!!
+- You can pick colors(!!!)
 - You can select a color
-- You can copy colors in different formats as their CSS functions
-    - Rgb
-    - Rgba
-    - Hsl
-    - Hsv
-    - OkLab
-    - More to come soon
+- You can copy colors as any CSS color function or a hex code
 - Very neat UI
