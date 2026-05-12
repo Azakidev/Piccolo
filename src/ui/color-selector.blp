@@ -1,0 +1,190 @@
+using Gtk 4.0;
+
+template $PiccoloColorSelector: Box {
+  orientation: vertical;
+  spacing: 4;
+
+  Box sliders {
+    orientation: vertical;
+    spacing: 2;
+
+    Box {
+      orientation: horizontal;
+      spacing: 2;
+
+      Gtk.Scale hue_slider {
+        orientation: horizontal;
+        hexpand: true;
+        draw-value: false;
+        value-pos: right;
+        can-focus: false;
+        round-digits: 0;
+        tooltip-text: _("Hue");
+
+        adjustment: Gtk.Adjustment hue_a {
+          lower: 0;
+          upper: 360;
+          value: 0;
+          step-increment: 1;
+          page-increment: 10;
+          page-size: 0;
+        };
+
+        styles [
+          "filled_scale",
+          "hue_slider",
+          "color_slider",
+        ]
+      }
+
+      Gtk.SpinButton hue_label {
+        valign: center;
+
+        numeric: true;
+        width-chars: 3;
+        wrap: true;
+
+        tooltip-text: _("Hue");
+
+        styles [
+          "compact",
+        ]
+
+        adjustment: Gtk.Adjustment {
+          lower: 0;
+          upper: 360;
+          value: 0;
+          step-increment: 1;
+          page-increment: 10;
+          page-size: 0;
+        };
+      }
+    }
+
+    Box {
+      orientation: horizontal;
+      spacing: 2;
+
+      Gtk.Scale saturation_slider {
+        orientation: horizontal;
+        width-request: 150;
+        hexpand: true;
+        draw-value: false;
+        value-pos: right;
+        can-focus: false;
+        round-digits: 0;
+        tooltip-text: _("Saturation");
+
+        adjustment: Gtk.Adjustment saturation_a {
+          lower: 0;
+          upper: 100;
+          value: 0;
+          step-increment: 0.05;
+          page-increment: 0.05;
+          page-size: 0;
+        };
+
+        styles [
+          "filled_scale",
+          "saturation_slider",
+          "color_slider",
+        ]
+      }
+
+      Gtk.SpinButton saturation_label {
+        valign: center;
+
+        numeric: true;
+        width-chars: 3;
+        tooltip-text: _("Saturation");
+
+        styles [
+          "compact",
+        ]
+
+        adjustment: Gtk.Adjustment {
+          lower: 0;
+          upper: 100;
+          value: 0;
+          step-increment: 1;
+          page-increment: 10;
+          page-size: 0;
+        };
+      }
+    }
+
+    Box {
+      orientation: horizontal;
+      spacing: 2;
+
+      Gtk.Scale value_slider {
+        orientation: horizontal;
+        width-request: 150;
+        hexpand: true;
+        draw-value: false;
+        value-pos: right;
+        can-focus: false;
+        round-digits: 0;
+        tooltip-text: _("Value");
+
+        adjustment: Gtk.Adjustment value_a {
+          lower: 0;
+          upper: 100;
+          value: 0;
+          step-increment: 0.05;
+          page-increment: 0.05;
+          page-size: 0;
+        };
+
+        styles [
+          "filled_scale",
+          "value_slider",
+          "color_slider",
+        ]
+      }
+
+      Gtk.SpinButton value_label {
+        valign: center;
+
+        numeric: true;
+        width-chars: 3;
+        tooltip-text: _("Value");
+
+        styles [
+          "compact",
+        ]
+
+        adjustment: Gtk.Adjustment {
+          lower: 0;
+          upper: 100;
+          value: 0;
+          step-increment: 1;
+          page-increment: 10;
+          page-size: 0;
+        };
+      }
+    }
+
+    Box {
+      orientation: horizontal;
+      spacing: 4;
+
+      Label {
+        hexpand: true;
+        halign: end;
+        label: _("Hex code:");
+      }
+
+      Entry hex_label {
+        text: _("#676767"); // Placeholder, teehee
+        xalign: 1;
+        width-chars: 9;
+        max-width-chars: 7;
+        max-length: 7;
+        tooltip-text: _("Color hexadecimal code");
+
+        styles ["compact"]
+      }
+    }
+  }
+}

@@ -1,0 +1,53 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $PiccoloColorBox: Adw.Bin {
+    hexpand: true;
+
+    styles [
+        "card",
+        "activatable"
+    ]
+
+    Box {
+        orientation: horizontal;
+        margin-top: 8;
+        margin-start: 8;
+        margin-bottom: 8;
+        margin-end: 8;
+
+        Image {
+            icon-name: "copy-symbolic";
+            pixel-size: 24;
+
+            accessibility {
+                label: _("Copy the color");
+            }
+        }
+
+        Box {
+            orientation: vertical;
+            spacing: 8;
+            valign: center;
+            halign: center;
+            hexpand: true;
+
+            Label format {
+                label: _("Format goes here");
+
+                styles [
+                    "heading",
+                ]
+            }
+
+            Label function {
+                label: _("The color goes here");
+                width-chars: 22;
+
+                styles [
+                    "caption",
+                ]
+            }
+        }
+    }
+}

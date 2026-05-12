@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=Piccolo
+Exec=piccolo
+Icon=art.FatDawlf.Piccolo
+Terminal=false
+Type=Application
+Categories=Utility;
+Keywords=GTK;
+StartupNotify=true
+DBusActivatable=false

@@ -1,0 +1,3 @@
+[D-BUS Service]
+Name=art.FatDawlf.Piccolo
+Exec=@bindir@/piccolo --gapplication-service

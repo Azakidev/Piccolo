@@ -1,0 +1,22 @@
+[package]
+name = "piccolo"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+color = { version = "0.3" }
+ashpd = { version = "0.13", default-features = false, features = [
+    "gtk4",
+    "async-io",
+    "screenshot"
+]}
+strum = { version = "0.28", features = ["derive"] }
+struct_iterable = { version = "0.1" }
+
+gettext-rs = { version = "0.7", features = ["gettext-system"] }
+gtk = { version = "0.11", package = "gtk4", features = ["gnome_50"] }
+
+[dependencies.adw]
+package = "libadwaita"
+version = "0.9"
+features = ["v1_9"]

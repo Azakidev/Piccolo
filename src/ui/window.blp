@@ -1,0 +1,113 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $PiccoloWindow: Adw.ApplicationWindow {
+    title: _("Piccolo");
+    default-width: 650;
+    default-height: 350;
+    width-request: 550;
+    height-request: 300;
+
+    content: Adw.ToastOverlay toast_overlay {
+        child: Adw.OverlaySplitView left_split {
+            sidebar-position: start;
+
+            sidebar: Adw.NavigationPage {
+                title: _("Color formats");
+
+                ScrolledWindow {
+                    hscrollbar-policy: never;
+                    vscrollbar-policy: automatic;
+
+                    Box list {
+                        orientation: vertical;
+                        spacing: 8;
+                        margin-top: 8;
+                        margin-start: 8;
+                        margin-bottom: 8;
+                        margin-end: 8;
+                    }
+                }
+            };
+
+            content: Adw.ToolbarView {
+                [top]
+                Adw.HeaderBar {
+                    [start]
+                    ToggleButton sidebar_toggle {
+                        icon-name: "sidebar-show-symbolic";
+                        tooltip-text: _("Toggle Sidebar");
+                    }
+
+                    Button picker_button {
+                        icon-name: "color-picker-symbolic";
+                        action-name: "win.pick-color";
+                        tooltip-text: _("Pick a color");
+
+                        accessibility {
+                            label: _("Pick a color");
+                        }
+                    }
+
+                    [end]
+                    MenuButton {
+                        primary: true;
+                        icon-name: "open-menu-symbolic";
+                        tooltip-text: _("Main Menu");
+                        menu-model: primary_menu;
+                    }
+
+                    [end]
+                    Button copy_button {
+                        icon-name: "copy-symbolic";
+                        action-name: "win.copy-color";
+                        action-target: "''";
+                        tooltip-text: _("Copy the color hex code");
+
+                        accessibility {
+                            label: _("Copy the color hex code");
+                        }
+                    }
+                }
+
+                content: Box {
+                    orientation: horizontal;
+                    valign: fill;
+                    vexpand: true;
+                    halign: fill;
+                    hexpand: true;
+                    spacing: 8;
+                    margin-top: 16;
+                    margin-start: 16;
+                    margin-end: 16;
+                    margin-bottom: 16;
+
+                    $PiccoloColorWheel wheel {
+                        vexpand: true;
+                        hexpand: true;
+                    }
+
+                    $PiccoloColorSelector selector {
+                        hexpand: true;
+                        vexpand: true;
+                        valign: center;
+                    }
+                };
+            };
+        };
+    };
+}
+
+menu primary_menu {
+    section {
+        item {
+            label: _("_Keyboard Shortcuts");
+            action: "app.shortcuts";
+        }
+
+        item {
+            label: _("_About Piccolo");
+            action: "app.about";
+        }
+    }
+}
