@@ -14,5 +14,17 @@ Adw.ShortcutsDialog shortcuts_dialog {
       title: C_("shortcut window", "Quit");
       action-name: "app.quit";
     }
+
+    Adw.ShortcutsItem {
+      title: C_("shortcut window", "Pick a Color");
+      action-name: "win.pick-color";
+      accelerator: "P";
+    }
+
+    Adw.ShortcutsItem {
+      title: C_("shortcut window", "Toggle the sidebar");
+      action-name: "win.toggle-sidebar";
+      accelerator: "<Ctrl>S";
+    }
   }
 }

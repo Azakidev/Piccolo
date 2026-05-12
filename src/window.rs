@@ -274,6 +274,8 @@ pub enum WindowAction {
     ColorPick,
     #[strum(to_string = "win.clear-focus")]
     FocusClear,
+    #[strum(to_string = "win.toggle-sidebar")]
+    SidebarToggle,
 }
 
 impl Deref for WindowAction {
@@ -321,6 +323,18 @@ impl WindowAction {
                     klass.add_binding_action(
                         gdk::Key::Escape,
                         gdk::ModifierType::NO_MODIFIER_MASK,
+                        &action,
+                    );
+                }
+                Self::SidebarToggle => {
+                    klass.install_action(&action, None, |win, _, _| {
+                        let sidebar = &win.imp().left_split;
+                        sidebar.set_show_sidebar(!sidebar.shows_sidebar());
+                    });
+
+                    klass.add_binding_action(
+                        gdk::Key::S,
+                        gdk::ModifierType::CONTROL_MASK,
                         &action,
                     );
                 }
