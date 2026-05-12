@@ -18,18 +18,15 @@
   <url type="vcs-browser">https://github.com/Azakidev/Piccolo</url>
   <url type="bugtracker">https://github.com/Azakidev/Piccolo/issues</url>
   <url type="contact">https://fatdawlf.art</url>
-  <!-- URLs of this type should point to a webpage where users can submit or modify translations of the upstream project -->
-  <url type="translate">https://example.org/translate</url>
 
   <translation type="gettext">piccolo</translation>
   <launchable type="desktop-id">art.FatDawlf.Piccolo.desktop</launchable>
 
   <content_rating type="oars-1.1" />
 
-  <!-- Applications should set a brand color in both light and dark variants like so -->
   <branding>
-    <color type="primary" scheme_preference="light">#ff00ff</color>
-    <color type="primary" scheme_preference="dark">#993d3d</color>
+    <color type="primary" scheme_preference="light">#23d53c</color>
+    <color type="primary" scheme_preference="dark">#067400</color>
   </branding>
 
   <screenshots>
