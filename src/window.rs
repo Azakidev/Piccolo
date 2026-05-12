@@ -154,6 +154,7 @@ impl PiccoloWindow {
         toggle
             .bind_property("active", sidebar, "show-sidebar")
             .sync_create()
+            .bidirectional()
             .build();
     }
 
