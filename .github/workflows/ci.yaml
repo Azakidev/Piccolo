@@ -7,31 +7,51 @@ on:
     branches: [ "main" ]
 
 jobs:
-  quality-checks:
+  cargo-fmt:
     runs-on: ubuntu-latest
+    container:
+      image: rust:slim
     steps:
       - uses: actions/checkout@v4
 
-      - name: Install System Dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y libgtk-4-dev pkg-config libadwaita-1-dev
+      - name: Add rustfmt
+        run: rustup component add rustfmt
 
-      - name: Install Rust Toolchain
-        uses: dtolnay/rust-toolchain@stable
-        with:
-          components: clippy, rustfmt
-
-      - name: Check Formatting
+      - name: Check formatting
         run: cargo fmt --all -- --check
 
+  cargo-clippy:
+    runs-on: ubuntu-latest
+    container:
+      image: 'quay.io/gnome_infrastructure/gnome-runtime-images:gnome-50'
+      options: --privileged
+    steps: 
+      - uses: actions/checkout@v4
+
+      - name: Runtime information
+        run: |
+          # Report the installed versions of the runtime
+          flatpak info org.gnome.Platform
+          flatpak info org.gnome.Sdk
+
+      - name: Prepare builder
+        run: |
+          flatpak-builder --user --disable-rofiles-fuse --force-clean --keep-build-dirs --stop-at=piccolo flatpak_app dist/linux/flatpak/art.fatdawlf.Piccolo.Devel.json
+          flatpak build-finish --socket=x11 --share=network flatpak_app
+
       - name: Run Clippy
-        run: cargo clippy -- -D warnings
+        run: |
+          xvfb-run -a -s "-screen 0 1024x768x24" \
+            flatpak-builder --user --disable-rofiles-fuse --build-shell=piccolo flatpak_app dist/linux/flatpak/art.fatdawlf.Piccolo.Devel.json <<END \
+              cargo clippy -- -D warnings \
+            END
+
 
   flatpak-build:
     runs-on: ubuntu-latest
     container:
       image: ghcr.io/flathub-infra/flatpak-github-actions:gnome-50
+      options: --privileged
     steps:
       - uses: actions/checkout@v4
 
