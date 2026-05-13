@@ -35,7 +35,8 @@
             "sources": [
                 {
                     "type": "git",
-                    "url": "https://github.com/Azakidev/Piccolo"
+                    "url": "https://github.com/Azakidev/Piccolo",
+                    "branch": "main"
                 }
             ]
         }
