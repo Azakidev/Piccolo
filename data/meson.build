@@ -1,6 +1,6 @@
 desktop_file = i18n.merge_file(
-        input: 'art.FatDawlf.Piccolo.desktop.in',
-       output: 'art.FatDawlf.Piccolo.desktop',
+        input: 'art.fatdawlf.Piccolo.desktop.in',
+       output: 'art.fatdawlf.Piccolo.desktop',
          type: 'desktop',
        po_dir: '../po',
       install: true,
@@ -13,8 +13,8 @@ if desktop_utils.found()
 endif
 
 appstream_file = i18n.merge_file(
-        input: 'art.FatDawlf.Piccolo.metainfo.xml.in',
-       output: 'art.FatDawlf.Piccolo.metainfo.xml',
+        input: 'art.fatdawlf.Piccolo.metainfo.xml.in',
+       output: 'art.fatdawlf.Piccolo.metainfo.xml',
        po_dir: '../po',
       install: true,
   install_dir: get_option('datadir') / 'metainfo'
@@ -24,7 +24,7 @@ appstreamcli = find_program('appstreamcli', required: false, disabler: true)
 test('Validate appstream file', appstreamcli,
      args: ['validate', '--no-net', '--explain', appstream_file])
 
-install_data('art.FatDawlf.Piccolo.gschema.xml',
+install_data('art.fatdawlf.Piccolo.gschema.xml',
   install_dir: get_option('datadir') / 'glib-2.0' / 'schemas'
 )
 
@@ -37,8 +37,8 @@ test('Validate schema file',
 service_conf = configuration_data()
 service_conf.set('bindir', get_option('prefix') / get_option('bindir'))
 configure_file(
-  input: 'art.FatDawlf.Piccolo.service.in',
-  output: 'art.FatDawlf.Piccolo.service',
+  input: 'art.fatdawlf.Piccolo.service.in',
+  output: 'art.fatdawlf.Piccolo.service',
   configuration: service_conf,
   install_dir: get_option('datadir') / 'dbus-1' / 'services'
 )

@@ -52,7 +52,7 @@ mod imp {
 
     #[derive(Debug, Default, gtk::CompositeTemplate, Properties)]
     #[properties(wrapper_type = super::PiccoloWindow)]
-    #[template(resource = "/art/FatDawlf/Piccolo/window.ui")]
+    #[template(resource = "/art/fatdawlf/Piccolo/window.ui")]
     pub struct PiccoloWindow {
         // Template widgets
         #[template_child]

@@ -1,6 +1,6 @@
 /* MIT License
  *
- * Copyright (c) 2026 FatDawlf
+ * Copyright (c) 2026 fatdawlf
  *
  * SPDX-License-Identifier: MIT
  */
@@ -21,7 +21,7 @@ mod imp {
 
     #[derive(Default, gtk::CompositeTemplate, Properties)]
     #[properties(wrapper_type = super::PiccoloColorBox)]
-    #[template(resource = "/art/FatDawlf/Piccolo/color-box.ui")]
+    #[template(resource = "/art/fatdawlf/Piccolo/color-box.ui")]
     pub struct PiccoloColorBox {
         // Children
         #[template_child]

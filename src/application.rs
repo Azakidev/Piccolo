@@ -1,6 +1,6 @@
 /* MIT License
  *
- * Copyright (c) 2026 FatDawlf
+ * Copyright (c) 2026 fatdawlf
  *
  * SPDX-License-Identifier: MIT
  */
@@ -68,7 +68,7 @@ impl PiccoloApplication {
         glib::Object::builder()
             .property("application-id", application_id)
             .property("flags", flags)
-            .property("resource-base-path", "/art/FatDawlf/Piccolo")
+            .property("resource-base-path", "/art/fatdawlf/Piccolo")
             .build()
     }
 
@@ -86,13 +86,13 @@ impl PiccoloApplication {
         let window = self.active_window().unwrap();
         let about = adw::AboutDialog::builder()
             .application_name("Piccolo")
-            .application_icon("art.FatDawlf.Piccolo")
-            .developer_name("FatDawlf")
+            .application_icon("art.fatdawlf.Piccolo")
+            .developer_name("fatdawlf")
             .version(VERSION)
-            .developers(vec!["FatDawlf https://fatdawlf.art"])
+            .developers(vec!["fatdawlf https://fatdawlf.art"])
             // Translators: Replace "translator-credits" with your name/username, and optionally an email or URL.
             .translator_credits(gettext("translator-credits"))
-            .copyright("© 2026 FatDawlf")
+            .copyright("© 2026 fatdawlf")
             .license_type(gtk::License::MitX11)
             .build();
 

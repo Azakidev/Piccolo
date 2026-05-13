@@ -1,6 +1,12 @@
 # List of source files containing translatable strings.
 # Please keep this file sorted alphabetically.
-data/art.FatDawlf.Piccolo.desktop.in
-data/art.FatDawlf.Piccolo.metainfo.xml.in
-data/art.FatDawlf.Piccolo.gschema.xml
-src/window.blp
+
+# Metadata
+data/art.fatdawlf.Piccolo.desktop.in
+data/art.fatdawlf.Piccolo.metainfo.xml.in
+data/art.fatdawlf.Piccolo.gschema.xml
+# UI
+src/ui/color-box.blp
+src/ui/color-selector.blp
+src/ui/shortcuts-dialog.blp
+src/ui/window.blp

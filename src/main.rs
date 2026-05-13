@@ -1,6 +1,6 @@
 /* MIT License
  *
- * Copyright (c) 2026 FatDawlf
+ * Copyright (c) 2026 fatdawlf
  *
  * SPDX-License-Identifier: MIT
  */
@@ -33,7 +33,7 @@ fn main() -> glib::ExitCode {
     // Create a new GtkApplication. The application manages our main loop,
     // application windows, integration with the window manager/compositor, and
     // desktop features such as file opening and single-instance applications.
-    let app = PiccoloApplication::new("art.FatDawlf.Piccolo", &gio::ApplicationFlags::empty());
+    let app = PiccoloApplication::new("art.fatdawlf.Piccolo", &gio::ApplicationFlags::empty());
 
     // Run the application. This function will block until the application
     // exits. Upon return, we have our exit code to return to the shell. (This

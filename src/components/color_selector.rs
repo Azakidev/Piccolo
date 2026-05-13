@@ -1,6 +1,6 @@
 /* MIT License
  *
- * Copyright (c) 2026 FatDawlf
+ * Copyright (c) 2026 fatdawlf
  *
  * SPDX-License-Identifier: MIT
  */
@@ -29,7 +29,7 @@ mod imp {
 
     #[derive(Debug, Default, gtk::CompositeTemplate, Properties)]
     #[properties(wrapper_type = super::PiccoloColorSelector)]
-    #[template(resource = "/art/FatDawlf/Piccolo/color-selector.ui")]
+    #[template(resource = "/art/fatdawlf/Piccolo/color-selector.ui")]
     pub struct PiccoloColorSelector {
         #[template_child]
         pub chip: TemplateChild<PiccoloColorChip>,

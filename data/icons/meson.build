@@ -1,4 +1,4 @@
-application_id = 'art.FatDawlf.Piccolo'
+application_id = 'art.fatdawlf.Piccolo'
 
 scalable_dir = 'hicolor' / 'scalable' / 'apps'
 install_data(

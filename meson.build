@@ -9,7 +9,7 @@ project(
   ],
 )
 
-app_id = 'art.FatDawlf.Piccolo@0@'.format(get_option('app_id_suffix'))
+app_id = 'art.fatdawlf.Piccolo@0@'.format(get_option('app_id_suffix'))
 bin_name = 'piccolo'
 
 i18n = import('i18n')
