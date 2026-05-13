@@ -23,7 +23,7 @@ jobs:
   cargo-clippy:
     runs-on: ubuntu-latest
     container:
-      image: 'quay.io/gnome_infrastructure/gnome-runtime-images:gnome-50'
+      image: ghcr.io/flathub-infra/flatpak-github-actions:gnome-50
       options: --privileged
     steps: 
       - uses: actions/checkout@v4
@@ -36,6 +36,7 @@ jobs:
 
       - name: Prepare builder
         run: |
+          flatpak install -y flathub org.freedesktop.Sdk.Extension.rust-stable/x86_64/25.08
           flatpak-builder --user --disable-rofiles-fuse --force-clean --keep-build-dirs --stop-at=piccolo flatpak_app dist/linux/flatpak/art.fatdawlf.Piccolo.Devel.json
           flatpak build-finish --socket=x11 --share=network flatpak_app
 
