@@ -1,24 +1,6 @@
 /* MIT License
  *
- * Copyright (c) 2026 Unknown
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * Copyright (c) 2026 FatDawlf
  *
  * SPDX-License-Identifier: MIT
  */
@@ -30,7 +12,7 @@ use adw::{
     subclass::prelude::*,
 };
 use ashpd::desktop::Color;
-use color::{OpaqueColor, Srgb};
+use color::{LinearSrgb, OpaqueColor};
 use gtk::gdk;
 use std::{
     cell::RefCell,
@@ -193,7 +175,7 @@ impl PiccoloWindow {
     }
 
     fn set_color(&self, color: Color) {
-        let col: OpaqueColor<Srgb> = OpaqueColor::new([
+        let col: OpaqueColor<LinearSrgb> = OpaqueColor::new([
             color.red() as f32,
             color.green() as f32,
             color.blue() as f32,
@@ -213,6 +195,22 @@ impl PiccoloWindow {
             async move {
                 match request_picker().await {
                     Ok(color) => obj.set_color(color),
+                    Err(e) => eprintln!("[ Warn ] {}", e),
+                }
+            }
+        ));
+    }
+
+    pub fn pick_color_and_present(&self) {
+        glib::spawn_future_local(glib::clone!(
+            #[weak(rename_to = obj)]
+            self,
+            async move {
+                match request_picker().await {
+                    Ok(color) => {
+                        obj.set_color(color);
+                        obj.present()
+                    }
                     Err(e) => eprintln!("[ Warn ] {}", e),
                 }
             }
