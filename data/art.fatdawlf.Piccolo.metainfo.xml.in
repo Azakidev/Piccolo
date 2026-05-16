@@ -28,16 +28,16 @@
     <content_rating type="oars-1.1" />
 
     <branding>
-        <color type="primary" scheme_preference="light">#23d53c</color>
-        <color type="primary" scheme_preference="dark">#067400</color>
+        <color type="primary" scheme_preference="light">#61bf6f</color>
+        <color type="primary" scheme_preference="dark">#27472b</color>
     </branding>
 
     <screenshots>
-        <screenshot type="default">
+        <screenshot type="default" xml:lang="en">
             <image>https://raw.githubusercontent.com/Azakidev/Piccolo/refs/heads/main/dist/ss/1.png</image>
             <caption>The main window</caption>
         </screenshot>
-        <screenshot>
+        <screenshot xml:lang="en">
             <image>https://raw.githubusercontent.com/Azakidev/Piccolo/refs/heads/main/dist/ss/2.png</image>
             <caption>The main window with the sidebar expanded</caption>
         </screenshot>

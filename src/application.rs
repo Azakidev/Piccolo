@@ -87,12 +87,12 @@ impl PiccoloApplication {
         let about = adw::AboutDialog::builder()
             .application_name("Piccolo")
             .application_icon("art.fatdawlf.Piccolo")
-            .developer_name("fatdawlf")
+            .developer_name("FatDawlf")
             .version(VERSION)
-            .developers(vec!["fatdawlf https://fatdawlf.art"])
+            .developers(vec!["FatDawlf https://fatdawlf.art"])
             // Translators: Replace "translator-credits" with your name/username, and optionally an email or URL.
             .translator_credits(gettext("translator-credits"))
-            .copyright("© 2026 fatdawlf")
+            .copyright("© 2026 FatDawlf")
             .license_type(gtk::License::MitX11)
             .build();
 
