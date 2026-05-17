@@ -44,6 +44,17 @@
     </screenshots>
 
     <releases>
+        <release version="0.1.1" date="2026-05-17">
+            <url type="details">https://github.com/Azakidev/Piccolo/releases/tag/0.1.1</url>
+            <description translate="no">
+                <p>Changelog:</p>
+                <ul>
+                    <li>Use the correct color space when picking a color using the portal</li>
+                    <li>Added the --pick launch argument to immediately request a color before
+                        launching the window</li>
+                </ul>
+            </description>
+        </release>
         <release version="0.1.0" date="2026-05-13">
             <url type="details">https://github.com/Azakidev/Piccolo/releases/tag/0.1.0</url>
             <description translate="no">
