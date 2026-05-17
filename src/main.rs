@@ -1,6 +1,6 @@
 /* MIT License
  *
- * Copyright (c) 2026 fatdawlf
+ * Copyright (c) 2026 FatDawlf
  *
  * SPDX-License-Identifier: MIT
  */
@@ -30,14 +30,8 @@ fn main() -> glib::ExitCode {
         .expect("Could not load resources");
     gio::resources_register(&resources);
 
-    // Create a new GtkApplication. The application manages our main loop,
-    // application windows, integration with the window manager/compositor, and
-    // desktop features such as file opening and single-instance applications.
+    // Create app
     let app = PiccoloApplication::new("art.fatdawlf.Piccolo", &gio::ApplicationFlags::empty());
 
-    // Run the application. This function will block until the application
-    // exits. Upon return, we have our exit code to return to the shell. (This
-    // is the code you see when you do `echo $?` after running a command in a
-    // terminal.
     app.run()
 }

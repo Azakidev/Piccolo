@@ -1,23 +1,25 @@
 /* MIT License
  *
- * Copyright (c) 2026 fatdawlf
+ * Copyright (c) 2026 FatDawlf
  *
  * SPDX-License-Identifier: MIT
  */
 
-use adw::prelude::*;
-use adw::subclass::prelude::*;
+use adw::{prelude::*, subclass::prelude::*};
 use gettextrs::gettext;
 use gtk::{gio, glib};
+use std::cell::Cell;
 
-use crate::PiccoloWindow;
-use crate::config::VERSION;
+use crate::{PiccoloWindow, config::VERSION};
 
 mod imp {
+
     use super::*;
 
     #[derive(Debug, Default)]
-    pub struct PiccoloApplication {}
+    pub struct PiccoloApplication {
+        pub launch_pick: Cell<bool>,
+    }
 
     #[glib::object_subclass]
     impl ObjectSubclass for PiccoloApplication {
@@ -29,17 +31,22 @@ mod imp {
     impl ObjectImpl for PiccoloApplication {
         fn constructed(&self) {
             self.parent_constructed();
+
             let obj = self.obj();
             obj.setup_gactions();
             obj.set_accels_for_action("app.quit", &["<control>q"]);
+            obj.add_main_option(
+                "pick",
+                glib::Char::from(b'p'),
+                glib::OptionFlags::NONE,
+                glib::OptionArg::None,
+                "Pick a color upon launch",
+                None,
+            );
         }
     }
 
     impl ApplicationImpl for PiccoloApplication {
-        // We connect to the activate callback to create a window when the application
-        // has been launched. Additionally, this callback notifies us when the user
-        // tries to launch a "second instance" of the application. When they try
-        // to do that, we'll just present any existing window.
         fn activate(&self) {
             let application = self.obj();
             // Get the current window or create one if necessary
@@ -48,8 +55,24 @@ mod imp {
                 window.upcast()
             });
 
-            // Ask the window manager/compositor to present the window
-            window.present();
+            if self.launch_pick.get()
+                && let Some(win) = window.downcast_ref::<PiccoloWindow>()
+            {
+                win.pick_color_and_present();
+            } else {
+                window.present();
+            }
+        }
+
+        fn handle_local_options(
+            &self,
+            options: &glib::VariantDict,
+        ) -> std::ops::ControlFlow<glib::ExitCode> {
+            if options.lookup_value("pick", None).is_some() {
+                self.launch_pick.set(true);
+            }
+
+            std::ops::ControlFlow::Continue(())
         }
     }
 

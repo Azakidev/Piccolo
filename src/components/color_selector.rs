@@ -1,6 +1,6 @@
 /* MIT License
  *
- * Copyright (c) 2026 fatdawlf
+ * Copyright (c) 2026 FatDawlf
  *
  * SPDX-License-Identifier: MIT
  */
