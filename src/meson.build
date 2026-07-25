@@ -4,9 +4,11 @@ gnome = import('gnome')
 blueprints = custom_target(
   'blueprints',
   input: files(
-    'ui/shortcuts-dialog.blp',
-    'ui/color-selector.blp',
     'ui/color-box.blp',
+    'ui/color-selector.blp',
+    'ui/history.blp',
+    'ui/history-chip.blp',
+    'ui/shortcuts-dialog.blp',
     'ui/window.blp',
   ),
   output: '.',

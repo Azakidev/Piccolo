@@ -10,5 +10,8 @@ pub mod color_chip;
 pub mod color_selector;
 pub mod color_wheel;
 
+pub mod history_chip;
+pub mod history;
+
 pub mod color_functions;
 pub mod utils;

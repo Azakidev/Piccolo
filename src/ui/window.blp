@@ -33,10 +33,14 @@ template $PiccoloWindow: Adw.ApplicationWindow {
             content: Adw.ToolbarView {
                 [top]
                 Adw.HeaderBar {
-                    [start]
                     ToggleButton sidebar_toggle {
                         icon-name: "sidebar-show-symbolic";
                         tooltip-text: _("Toggle Sidebar");
+                    }
+
+                    ToggleButton history_toggle {
+                        icon-name: "history-undo-symbolic";
+                        tooltip-text: _("Toggle color history");
                     }
 
                     Button picker_button {
@@ -70,27 +74,39 @@ template $PiccoloWindow: Adw.ApplicationWindow {
                     }
                 }
 
-                content: Box {
-                    orientation: horizontal;
-                    valign: fill;
-                    vexpand: true;
-                    halign: fill;
-                    hexpand: true;
-                    spacing: 8;
-                    margin-top: 16;
-                    margin-start: 16;
-                    margin-end: 16;
-                    margin-bottom: 16;
+                content: Adw.ViewStack stack {
+                    enable-transitions: true;
 
-                    $PiccoloColorWheel wheel {
-                        vexpand: true;
-                        hexpand: true;
+                    Adw.ViewStackPage picker_page {
+                        name: "picker_page";
+
+                        child: Box {
+                            orientation: horizontal;
+                            valign: fill;
+                            vexpand: true;
+                            halign: fill;
+                            hexpand: true;
+                            spacing: 8;
+                            margin-top: 16;
+                            margin-start: 16;
+                            margin-end: 16;
+                            margin-bottom: 16;
+
+                            $PiccoloColorWheel wheel {
+                                vexpand: true;
+                                hexpand: true;
+                            }
+
+                            $PiccoloColorSelector selector {
+                                hexpand: true;
+                                vexpand: true;
+                                valign: center;
+                            }
+                        };
                     }
-
-                    $PiccoloColorSelector selector {
-                        hexpand: true;
-                        vexpand: true;
-                        valign: center;
+                    Adw.ViewStackPage history_page {
+                        name: "history_page";
+                        child: $PiccoloHistory history {};
                     }
                 };
             };

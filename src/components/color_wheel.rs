@@ -19,7 +19,7 @@ use std::{
     rc::Rc,
 };
 
-use crate::components::utils::{Hsv, to_rgba};
+use crate::{components::utils::{Hsv, to_rgba}, window::WindowAction};
 
 const TRACK_WIDTH: f32 = 20f32;
 const TRIANGLE_GAP: f32 = 4f32;
@@ -32,7 +32,6 @@ enum ColorWheelDragState {
 }
 
 mod imp {
-
     use super::*;
 
     #[derive(Debug, Default, Properties)]
@@ -272,10 +271,14 @@ impl PiccoloColorWheel {
         ));
 
         controller.connect_drag_end(clone!(
+            #[weak(rename_to = obj)]
+            self,
             #[weak]
             state,
             move |_, _x, _y| {
                 state.set(None);
+
+                let _ = obj.activate_action(&WindowAction::ColorSave, None);
             }
         ));
 

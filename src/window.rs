@@ -30,17 +30,24 @@ use crate::{
 
 mod imp {
 
+    use crate::components::history::PiccoloHistory;
+
     use super::*;
 
     #[derive(Debug, Default, gtk::CompositeTemplate, Properties)]
     #[properties(wrapper_type = super::PiccoloWindow)]
     #[template(resource = "/art/fatdawlf/Piccolo/window.ui")]
     pub struct PiccoloWindow {
-        // Template widgets
+        // Navigation widgets
         #[template_child]
-        pub toast_overlay: TemplateChild<adw::ToastOverlay>,
+        pub stack: TemplateChild<adw::ViewStack>,
         #[template_child]
         pub sidebar_toggle: TemplateChild<gtk::ToggleButton>,
+        #[template_child]
+        pub history_toggle: TemplateChild<gtk::ToggleButton>,
+        // Picker widgets
+        #[template_child]
+        pub toast_overlay: TemplateChild<adw::ToastOverlay>,
         #[template_child]
         pub left_split: TemplateChild<adw::OverlaySplitView>,
         #[template_child]
@@ -49,6 +56,9 @@ mod imp {
         pub wheel: TemplateChild<PiccoloColorWheel>,
         #[template_child]
         pub selector: TemplateChild<PiccoloColorSelector>,
+        // History
+        #[template_child]
+        pub history: TemplateChild<PiccoloHistory>,
 
         // Properties
         #[property(get, set)]
@@ -98,6 +108,7 @@ mod imp {
             }
 
             obj.bind_sidebar_toggle();
+            obj.bind_history_toggle();
             obj.bind_wheel();
             obj.bind_selector();
             obj.setup_boxes();
@@ -136,6 +147,24 @@ impl PiccoloWindow {
             .sync_create()
             .bidirectional()
             .build();
+    }
+
+    fn bind_history_toggle(&self) {
+        let imp = self.imp();
+        let toggle = &imp.history_toggle;
+        let stack = &imp.stack;
+
+        toggle.connect_toggled(glib::clone!(
+            #[weak]
+            stack,
+            move |btn| {
+                if btn.is_active() {
+                    stack.set_visible_child_name("history_page");
+                } else {
+                    stack.set_visible_child_name("picker_page");
+                }
+            }
+        ));
     }
 
     fn bind_wheel(&self) {
@@ -186,6 +215,8 @@ impl PiccoloWindow {
         self.set_h(hsv.components[0]);
         self.set_s(hsv.components[1]);
         self.set_v(hsv.components[2]);
+
+        self.save_color();
     }
 
     fn pick_color(&self) {
@@ -217,9 +248,25 @@ impl PiccoloWindow {
         ));
     }
 
+    fn save_color(&self) {
+        let hsv = OpaqueColor::new([self.h(), self.s(), self.v()]);
+
+        self.imp().history.add_chip(&hsv);
+    }
+
+    fn emit_toast(&self, text: &str) {
+        let overlay = &self.imp().toast_overlay;
+
+        let toast = adw::Toast::builder()
+            .title(text)
+            .timeout(1)
+            .build();
+
+        overlay.add_toast(toast);
+    }
+
     fn copy_color(&self, content: Option<String>) {
         let clipboard = self.clipboard();
-        let overlay = &self.imp().toast_overlay;
 
         let hsv: OpaqueColor<Hsv> = OpaqueColor::new([self.h(), self.s(), self.v()]);
 
@@ -229,12 +276,7 @@ impl PiccoloWindow {
         let text = content.unwrap_or(hex);
         clipboard.set_text(&text);
 
-        let toast = adw::Toast::builder()
-            .title("Copied color")
-            .timeout(1)
-            .build();
-
-        overlay.add_toast(toast);
+        self.emit_toast("Copied color");
     }
 
     fn setup_boxes(&self) {
@@ -269,6 +311,10 @@ pub enum WindowAction {
     ColorCopy,
     #[strum(to_string = "win.pick-color")]
     ColorPick,
+    #[strum(to_string = "win.set-color")]
+    ColorSet,
+    #[strum(to_string = "win.save-color")]
+    ColorSave,
     #[strum(to_string = "win.clear-focus")]
     FocusClear,
     #[strum(to_string = "win.toggle-sidebar")]
@@ -311,6 +357,31 @@ impl WindowAction {
                         gdk::ModifierType::NO_MODIFIER_MASK,
                         &action,
                     );
+                }
+                Self::ColorSet => {
+                    klass.install_action(
+                        &action,
+                        Some(&<(f64, f64, f64)>::static_variant_type()),
+                        |win, _, arg| {
+                            if let Some(var) = arg
+                                && let Some((h, s, v)) = var.get::<(f64, f64, f64)>()
+                            {
+                                win.set_h(h as f32);
+                                win.set_s(s as f32);
+                                win.set_v(v as f32);
+
+                                win.emit_toast("Selected color");
+
+                                win.imp().stack.set_visible_child_name("picker_page");
+                                win.imp().history_toggle.set_active(false);
+                            }
+                        },
+                    );
+                }
+                Self::ColorSave => {
+                    klass.install_action(&action, None, |win, _, _| {
+                        win.save_color();
+                    });
                 }
                 Self::FocusClear => {
                     klass.install_action(&action, None, |win, _, _| {

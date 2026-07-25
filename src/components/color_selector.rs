@@ -11,17 +11,17 @@ use adw::{
 };
 use color::{AlphaColor, Hsl, OpaqueColor};
 use gtk::{
-    CssProvider, TemplateChild,
-    gdk::Display,
-    glib::{self, Properties, clone, object::ObjectExt},
-    prelude::EditableExt,
+    CssProvider, TemplateChild, gdk::Display, glib::{self, Properties, clone, object::ObjectExt}, prelude::{EditableExt, GestureDragExt},
 };
 use std::{
     cell::{Cell, RefCell},
     rc::Rc,
 };
 
-use crate::components::{color_chip::PiccoloColorChip, utils::Hsv};
+use crate::{
+    components::{color_chip::PiccoloColorChip, utils::Hsv},
+    window::WindowAction,
+};
 
 mod imp {
 
@@ -137,6 +137,15 @@ impl PiccoloColorSelector {
     fn link_sliders(&self) {
         let imp = self.imp();
 
+        let dc = gtk::GestureDrag::new();
+        dc.connect_drag_end(glib::clone!(
+            #[weak(rename_to = obj)]
+            self,
+            move |_, _, _| {
+                let _ = obj.activate_action(&WindowAction::ColorSave, None);
+            }
+        ));
+
         let hs = &imp.hue_slider;
         let hl = &imp.hue_label;
         let ha = &imp.hue_a;
@@ -152,7 +161,6 @@ impl PiccoloColorSelector {
                 label.set_value(val);
 
                 if obj.imp().should_update.get() {
-                    let _ = obj.activate_action("editor.set-color", None);
                     obj.update_properties();
                     obj.set_hex();
                 }
@@ -176,6 +184,17 @@ impl PiccoloColorSelector {
             .sync_create()
             .build();
 
+        hs.add_controller(dc);
+
+        let dc = gtk::GestureDrag::new();
+        dc.connect_drag_end(glib::clone!(
+            #[weak(rename_to = obj)]
+            self,
+            move |_, _, _| {
+                let _ = obj.activate_action(&WindowAction::ColorSave, None);
+            }
+        ));
+
         let ss = &imp.saturation_slider;
         let sl = &imp.saturation_label;
         let sa = &imp.saturation_a;
@@ -191,7 +210,6 @@ impl PiccoloColorSelector {
                 label.set_value(val);
 
                 if obj.imp().should_update.get() {
-                    let _ = obj.activate_action("editor.set-color", None);
                     obj.update_properties();
                     obj.set_hex();
                 }
@@ -215,9 +233,21 @@ impl PiccoloColorSelector {
             .sync_create()
             .build();
 
+        ss.add_controller(dc);
+
         let vs = &imp.value_slider;
         let vl = &imp.value_label;
         let va = &imp.value_a;
+
+        let dc = gtk::GestureDrag::new();
+        dc.connect_drag_end(glib::clone!(
+            #[weak(rename_to = obj)]
+            self,
+            move |_, _, _| {
+                let _ = obj.activate_action(&WindowAction::ColorSave, None);
+                    obj.set_hex();
+            }
+        ));
 
         vs.connect_value_changed(clone!(
             #[weak(rename_to = obj)]
@@ -230,7 +260,6 @@ impl PiccoloColorSelector {
                 label.set_value(val);
 
                 if obj.imp().should_update.get() {
-                    let _ = obj.activate_action("editor.set-color", None);
                     obj.update_properties();
                     obj.set_hex();
                 }
@@ -253,6 +282,8 @@ impl PiccoloColorSelector {
             .bidirectional()
             .sync_create()
             .build();
+
+        vs.add_controller(dc);
     }
 
     fn link_hex_label(&self) {
@@ -320,8 +351,8 @@ impl PiccoloColorSelector {
             self.set_h(h);
             self.set_s(s);
             self.set_v(v);
-            let _ = self.activate_action("editor.set-color", None);
             self.update_properties();
+            let _ = self.activate_action(&WindowAction::ColorSave, None);
             imp.should_update.set(true);
         }
     }

@@ -1,0 +1,52 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $PiccoloHistory: Adw.Bin {
+    vexpand: true;
+    hexpand: true;
+
+    ScrolledWindow {
+        vscrollbar-policy: never;
+        hscrollbar-policy: automatic;
+
+        EventControllerScroll scroller {
+            flags: vertical | horizontal;
+            propagation-phase: capture;
+        }
+
+        child: Adw.ViewStack stack {
+            enable-transitions: true;
+
+            Adw.ViewStackPage empty {
+                name: "empty";
+
+                child: Adw.Bin {
+                    hexpand: true;
+                    vexpand: true;
+                    halign: center;
+                    valign: center;
+
+                    Label {
+                        label: _("No colors have been yet picked.");
+                    }
+                };
+            }
+
+            Adw.ViewStackPage content {
+                name: "content";
+
+                child: Adw.WrapBox list {
+                    margin-top: 4;
+                    margin-bottom: 4;
+                    margin-start: 4;
+                    margin-end: 4;
+
+                    orientation: vertical;
+
+                    child-spacing: 4;
+                    line-spacing: 4;
+                };
+            }
+        };
+    }
+}

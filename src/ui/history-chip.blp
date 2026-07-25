@@ -1,0 +1,90 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $PiccoloHistoryChip: Adw.Bin {
+    vexpand: true;
+    width-request: 190;
+
+    Adw.Clamp {
+        maximum-size: 190;
+        unit: px;
+
+        child: Box container {
+            orientation: vertical;
+            spacing: 4;
+            margin-top: 4;
+            margin-bottom: 4;
+            margin-start: 4;
+            margin-end: 4;
+
+            styles [
+                "card",
+                "activatable",
+            ]
+
+            tooltip-text: _("Select color");
+            accessible-role: button;
+            focusable: true;
+
+            $PiccoloColorChip chip {
+                margin-top: 12;
+                margin-bottom: 6;
+                margin-start: 12;
+                margin-end: 12;
+                hexpand: true;
+                vexpand: true;
+                height-request: 160;
+            }
+
+            Label hex {
+                vexpand: true;
+                valign: end;
+
+                label: _("Hex code here");
+            }
+
+            Label rgb {
+                styles [
+                    "subtext",
+                ]
+
+                label: _("RGB values here");
+            }
+
+            Box action_buttons {
+                orientation: horizontal;
+
+                margin-top: 8;
+                margin-bottom: 8;
+                margin-start: 8;
+                margin-end: 8;
+
+                vexpand: true;
+                valign: end;
+
+                styles [
+                    "linked",
+                ]
+
+                Button copy_button {
+                    styles [
+                        "pill",
+                    ]
+
+                    tooltip-text: _("Copy color");
+                    icon-name: "copy-symbolic";
+                }
+
+                Button remove_button {
+                    styles [
+                        "destructive-action",
+                        "pill",
+                    ]
+
+                    tooltip-text: _("Remove chip");
+                    icon-name: "user-trash-symbolic";
+                }
+            }
+        };
+    }
+}

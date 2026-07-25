@@ -5,6 +5,8 @@
     <file preprocess="xml-stripblanks">shortcuts-dialog.ui</file>
     <file preprocess="xml-stripblanks">color-selector.ui</file>
     <file preprocess="xml-stripblanks">color-box.ui</file>
+    <file preprocess="xml-stripblanks">history.ui</file>
+    <file preprocess="xml-stripblanks">history-chip.ui</file>
     <file compressed="true">style.css</file>
   </gresource>
 </gresources>

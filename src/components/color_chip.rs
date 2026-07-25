@@ -10,17 +10,13 @@ use adw::{
     prelude::*,
     subclass::prelude::*,
 };
+use gtk::{graphene, gsk::RoundedRect};
 use color::OpaqueColor;
 use std::cell::RefCell;
 
-use crate::components::utils::Hsv;
+use crate::components::utils::{Hsv, to_rgba};
 
 mod imp {
-
-    use gtk::{graphene, gsk::RoundedRect};
-
-    use crate::components::utils::to_rgba;
-
     use super::*;
 
     #[derive(Default, Properties)]

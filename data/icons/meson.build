@@ -17,5 +17,7 @@ install_data(
   actions_dir / 'sidebar-show-symbolic.svg',
   actions_dir / 'color-picker-symbolic.svg',
   actions_dir / 'copy-symbolic.svg',
+  actions_dir / 'history-undo-symbolic.svg',
+  actions_dir / 'user-trash-symbolic.svg',
   install_dir: get_option('datadir') / 'icons' / actions_dir
   )
