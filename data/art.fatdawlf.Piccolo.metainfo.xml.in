@@ -35,15 +35,28 @@
     <screenshots>
         <screenshot type="default" xml:lang="en">
             <image>https://raw.githubusercontent.com/Azakidev/Piccolo/refs/heads/main/dist/ss/1.png</image>
-            <caption>The main window</caption>
+            <caption>The main page of the application</caption>
         </screenshot>
         <screenshot xml:lang="en">
             <image>https://raw.githubusercontent.com/Azakidev/Piccolo/refs/heads/main/dist/ss/2.png</image>
-            <caption>The main window with the sidebar expanded</caption>
+            <caption>The main page of the application with the sidebar expanded</caption>
+        </screenshot>
+        <screenshot xml:lang="en">
+            <image>https://raw.githubusercontent.com/Azakidev/Piccolo/refs/heads/main/dist/ss/3.png</image>
+            <caption>The page displaying the history of picked colors in a session.</caption>
         </screenshot>
     </screenshots>
 
     <releases>
+        <release version="0.2.0" date="2026-07-25">
+            <url type="details">https://github.com/Azakidev/Piccolo/releases/tag/0.2.0</url>
+            <description translate="no">
+                <p>Changelog:</p>
+                <ul>
+                    <li>Add a color history per session</li>
+                </ul>
+            </description>
+        </release>
         <release version="0.1.1" date="2026-05-17">
             <url type="details">https://github.com/Azakidev/Piccolo/releases/tag/0.1.1</url>
             <description translate="no">
