@@ -88,7 +88,7 @@ impl PiccoloHistory {
         let mut recents = self.imp().recent_colors.borrow_mut();
 
         if !recents.contains(color) {
-            recents.push(color.clone());
+            recents.push(*color);
             self.imp().list.prepend(&chip);
             if self.imp().list.first_child().is_some() {
                 self.imp().stack.set_visible_child_name("content");

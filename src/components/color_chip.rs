@@ -10,8 +10,8 @@ use adw::{
     prelude::*,
     subclass::prelude::*,
 };
-use gtk::{graphene, gsk::RoundedRect};
 use color::OpaqueColor;
+use gtk::{graphene, gsk::RoundedRect};
 use std::cell::RefCell;
 
 use crate::components::utils::{Hsv, to_rgba};

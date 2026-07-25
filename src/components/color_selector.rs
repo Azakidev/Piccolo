@@ -11,7 +11,10 @@ use adw::{
 };
 use color::{AlphaColor, Hsl, OpaqueColor};
 use gtk::{
-    CssProvider, TemplateChild, gdk::Display, glib::{self, Properties, clone, object::ObjectExt}, prelude::{EditableExt, GestureDragExt},
+    CssProvider, TemplateChild,
+    gdk::Display,
+    glib::{self, Properties, clone, object::ObjectExt},
+    prelude::{EditableExt, GestureDragExt},
 };
 use std::{
     cell::{Cell, RefCell},
@@ -245,7 +248,7 @@ impl PiccoloColorSelector {
             self,
             move |_, _, _| {
                 let _ = obj.activate_action(&WindowAction::ColorSave, None);
-                    obj.set_hex();
+                obj.set_hex();
             }
         ));
 

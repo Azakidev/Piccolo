@@ -257,10 +257,7 @@ impl PiccoloWindow {
     fn emit_toast(&self, text: &str) {
         let overlay = &self.imp().toast_overlay;
 
-        let toast = adw::Toast::builder()
-            .title(text)
-            .timeout(1)
-            .build();
+        let toast = adw::Toast::builder().title(text).timeout(1).build();
 
         overlay.add_toast(toast);
     }

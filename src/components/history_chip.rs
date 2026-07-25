@@ -15,7 +15,8 @@ use color::OpaqueColor;
 use std::cell::RefCell;
 
 use crate::{
-    components::{color_chip::PiccoloColorChip, history::PiccoloHistory, utils::Hsv}, window::WindowAction,
+    components::{color_chip::PiccoloColorChip, history::PiccoloHistory, utils::Hsv},
+    window::WindowAction,
 };
 
 mod imp {
