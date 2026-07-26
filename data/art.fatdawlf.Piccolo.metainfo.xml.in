@@ -48,6 +48,16 @@
     </screenshots>
 
     <releases>
+        <release version="0.2.1" date="2026-07-26">
+            <url type="details">https://github.com/Azakidev/Piccolo/releases/tag/0.2.1</url>
+            <description translate="no">
+                <p>Changelog:</p>
+                <ul>
+                    <li>Fixed color functions and display not using the correct colors due to an issue with the underlying color library</li>
+                    <li>Add XYZ-D65 color space to the color functions</li>
+                </ul>
+            </description>
+        </release>
         <release version="0.2.0" date="2026-07-25">
             <url type="details">https://github.com/Azakidev/Piccolo/releases/tag/0.2.0</url>
             <description translate="no">

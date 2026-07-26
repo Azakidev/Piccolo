@@ -20,10 +20,7 @@ use std::{
     rc::Rc,
 };
 
-use crate::{
-    components::utils::{to_rgba},
-    window::WindowAction,
-};
+use crate::{components::utils::to_rgba, window::WindowAction};
 
 const TRACK_WIDTH: f32 = 20f32;
 const TRIANGLE_GAP: f32 = 4f32;

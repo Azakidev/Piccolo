@@ -11,11 +11,11 @@ use adw::{
     prelude::*,
     subclass::prelude::*,
 };
-use prisma::Hsv;
 use angular_units::Deg;
+use prisma::Hsv;
 use std::cell::RefCell;
 
-use crate::components::{history_chip::PiccoloHistoryChip};
+use crate::components::history_chip::PiccoloHistoryChip;
 
 mod imp {
 

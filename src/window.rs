@@ -11,10 +11,10 @@ use adw::{
     prelude::*,
     subclass::prelude::*,
 };
+use angular_units::Deg;
 use ashpd::desktop::Color;
 use gtk::gdk;
 use prisma::{FromColor, Hsv, Rgb};
-use angular_units::Deg;
 use std::{
     cell::RefCell,
     ops::{Deref, Sub},

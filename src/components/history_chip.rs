@@ -10,8 +10,8 @@ use adw::{
     prelude::*,
     subclass::prelude::*,
 };
-use prisma::{FromColor, Hsv, Rgb};
 use angular_units::Deg;
+use prisma::{FromColor, Hsv, Rgb};
 use std::cell::RefCell;
 
 use crate::{

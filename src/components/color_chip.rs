@@ -11,8 +11,8 @@ use adw::{
     subclass::prelude::*,
 };
 use angular_units::Deg;
-use prisma::Hsv;
 use gtk::{graphene, gsk::RoundedRect};
+use prisma::Hsv;
 use std::cell::RefCell;
 
 mod imp {

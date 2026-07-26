@@ -5,7 +5,6 @@
  * SPDX-License-Identifier: MIT
  */
 
-
 use angular_units::Deg;
 use prisma::{FromColor, Hsv, Rgb};
 

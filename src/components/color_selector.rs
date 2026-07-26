@@ -9,7 +9,7 @@ use adw::{
     prelude::{RangeExt, WidgetExt},
     subclass::prelude::*,
 };
-use angular_units::{Angle, Deg};
+use angular_units::Deg;
 use gtk::{
     CssProvider, TemplateChild,
     gdk::Display,
@@ -396,7 +396,10 @@ fn make_value_gradient(hsv: Hsv<f32, Deg<f32>>) -> String {
     let rgb = Rgb::from_color(&full_hsv);
     let full_hsl: Hsl<f32, Deg<f32>> = Hsl::from_color(&rgb);
 
-    let (s, l) = (full_hsl.saturation() * 100f32, full_hsl.lightness() * 100f32);
+    let (s, l) = (
+        full_hsl.saturation() * 100f32,
+        full_hsl.lightness() * 100f32,
+    );
 
     format!(
         "linear-gradient(to right, \
