@@ -6,7 +6,7 @@
  */
 
 use adw::{prelude::*, subclass::prelude::*};
-use color::OpaqueColor;
+use angular_units::Deg;
 use gtk::{
     Snapshot,
     gdk::RGBA,
@@ -14,13 +14,14 @@ use gtk::{
     graphene::{Point, Rect},
     gsk::{self, ColorStop, RoundedRect},
 };
+use prisma::Hsv;
 use std::{
     cell::{Cell, RefCell},
     rc::Rc,
 };
 
 use crate::{
-    components::utils::{Hsv, to_rgba},
+    components::utils::{to_rgba},
     window::WindowAction,
 };
 
@@ -144,8 +145,7 @@ impl PiccoloColorWheel {
     }
 
     fn draw_triangle(&self, snapshot: &Snapshot) {
-        let hsv_max = [self.h(), 100f32, 100f32];
-        let color: OpaqueColor<Hsv> = OpaqueColor::new(hsv_max);
+        let color: Hsv<f32, Deg<f32>> = Hsv::new(Deg(self.h() % 360.), 1f32, 1f32);
         let rgba = to_rgba(&color);
 
         let (w, h) = (self.width() as f32, self.height() as f32);
@@ -302,13 +302,13 @@ impl PiccoloColorWheel {
                         ColorWheelDragState::SV => {
                             let (w1, w2, w3) = obj.to_triangle_coords((x, y));
 
-                            let s = (w3 / (w2 + w3)) * 100f32;
-                            let v = 100f32 - (w1 * 100f32);
+                            let s = w3 / (w2 + w3);
+                            let v = 1f32 - w1;
 
                             if v > f32::EPSILON {
-                                obj.set_s(s.clamp(0f32, 100f32));
+                                obj.set_s(s.clamp(0f32, 1f32));
                             }
-                            obj.set_v(v.clamp(0f32, 100f32));
+                            obj.set_v(v.clamp(0f32, 1f32));
                         }
                     }
                 }
@@ -400,7 +400,7 @@ impl PiccoloColorWheel {
 
     fn coodinates_from_sv(&self) -> (f32, f32) {
         let (w, h) = (self.width() as f32, self.height() as f32);
-        let (s, v) = (self.s() / 100f32, self.v() / 100f32);
+        let (s, v) = (self.s(), self.v());
 
         let (cx, _cy) = (w / 2f32, h / 2f32);
         let [(_pbx, pby), (_pwx, pwy), _ph] = self.triange_points();

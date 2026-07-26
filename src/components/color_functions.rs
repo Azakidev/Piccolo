@@ -7,16 +7,20 @@
 
 use std::ops::Deref;
 
-use color::{Hsl, Hwb, Lab, Lch, Oklab, Oklch, OpaqueColor};
+use angular_units::Deg;
+use prisma::{
+    FromColor, Hsl, Hsv, Hwb, Lab, Lchab, Rgb,
+    color_space::{ConvertToXyz, named::SRgb},
+    encoding::EncodableColor,
+    white_point::D65,
+};
 
-use crate::components::utils::Hsv;
+use crate::components::utils::Oklch;
 
 #[derive(strum::Display, strum::AsRefStr, strum::EnumIter)]
 pub enum ColorFormat {
-    #[strum(to_string = "Rgb")]
+    #[strum(to_string = "RGB")]
     Rgb,
-    #[strum(to_string = "Rgba")]
-    Rgba,
     #[strum(to_string = "HSL")]
     Hsl,
     #[strum(to_string = "HSV")]
@@ -31,6 +35,8 @@ pub enum ColorFormat {
     Lab,
     #[strum(to_string = "CIELch")]
     Lch,
+    #[strum(to_string = "XYZ - D65")]
+    Xyz,
 }
 
 impl Deref for ColorFormat {
@@ -41,52 +47,95 @@ impl Deref for ColorFormat {
 }
 
 impl ColorFormat {
-    pub fn get_function(&self, hsv: OpaqueColor<Hsv>) -> String {
+    pub fn get_function(&self, hsv: Hsv<f32, Deg<f32>>) -> String {
+        let rgb = Rgb::from_color(&hsv);
+
+        let srgb = rgb.srgb_encoded();
+        let rgblin = rgb.linear();
+
+        let rgba8: Rgb<u8> = rgblin.color_cast();
+
+        let cs = SRgb::default();
+        let xyz = cs.convert_to_xyz(&srgb);
+
         match self {
             Self::Rgb => {
-                let [r, g, b, _a] = hsv.to_rgba8().to_u8_array();
-                format!("rgb({r}, {g}, {b})")
-            }
-            Self::Rgba => {
-                let [r, g, b, a] = hsv.to_rgba8().to_u8_array();
-                format!("rgba({r}, {g}, {b}, {a})", a = a as f32 / 255.)
+                format!("rgb({}, {}, {})", rgba8.red(), rgba8.green(), rgba8.blue())
             }
             Self::Hsl => {
-                let hsl: OpaqueColor<Hsl> = hsv.convert();
-                let [h, s, l] = hsl.components;
-                format!("hsl({:.0}, {:.2}%, {:.2}%)", h, s, l)
+                let hsl: Hsl<f32, Deg<f32>> = Hsl::from_color(&rgb);
+                format!(
+                    "hsl({:.0}, {:.2}%, {:.2}%)",
+                    hsl.hue().0,
+                    hsl.saturation() * 100.,
+                    hsl.lightness() * 100.
+                )
             }
             Self::Hsv => {
-                let [h, s, v] = hsv.components;
-                format!("hsv({:.0}, {:.2}%, {:.2}%)", h, s, v)
+                format!(
+                    "hsv({:.0}, {:.2}%, {:.2}%)",
+                    hsv.hue().0,
+                    hsv.saturation() * 100.,
+                    hsv.value() * 100.
+                )
             }
             Self::Hwb => {
-                let hwb: OpaqueColor<Hwb> = hsv.convert();
-                let hue = hsv.components[0];
-                let [_h, w, b] = hwb.components;
-                format!("hwb({:.0}, {:.2}%, {:.2}%)", hue, w, b)
+                let hwb: Hwb<f32, Deg<f32>> = Hwb::from_color(&rgb);
+                format!(
+                    "hwb({:.0}, {:.2}%, {:.2}%)",
+                    hwb.hue().0,
+                    hwb.whiteness() * 100.,
+                    hwb.blackness() * 100.
+                )
             }
             Self::Oklab => {
-                let oklab: OpaqueColor<Oklab> = hsv.convert();
-                let [l, a, b] = oklab.components;
-                format!("oklab({:.2}%, {:.2}, {:.2})", 100. * l, a, b)
+                let oklab = oklab::srgb_f32_to_oklab(oklab::Rgb {
+                    r: srgb.red(),
+                    g: srgb.green(),
+                    b: srgb.blue(),
+                });
+                format!(
+                    "oklab({:.2}%, {:.2}, {:.2})",
+                    oklab.l * 100.,
+                    oklab.a,
+                    oklab.b
+                )
             }
             Self::Oklch => {
-                let oklch: OpaqueColor<Oklch> = hsv.convert();
-                let hue = hsv.components[0];
-                let [l, c, _h] = oklch.components;
-                format!("oklch({:.2}%, {:.2}, {:.0})", 100. * l, c, hue)
+                let oklab = oklab::srgb_f32_to_oklab(oklab::Rgb {
+                    r: srgb.red(),
+                    g: srgb.green(),
+                    b: srgb.blue(),
+                });
+                let oklch = Oklch::from(oklab);
+                format!(
+                    "oklch({:.2}%, {:.2}, {:.0})",
+                    oklch.l * 100.,
+                    oklch.c,
+                    oklch.h
+                )
             }
             Self::Lab => {
-                let oklab: OpaqueColor<Lab> = hsv.convert();
-                let [l, a, b] = oklab.components;
-                format!("lab({:.2}%, {:.2}, {:.2})", l, a, b)
+                let lab: Lab<f32, D65> = Lab::from_xyz(&xyz, D65);
+                format!("lab({:.2}%, {:.2}, {:.2})", lab.L(), lab.a(), lab.b())
             }
             Self::Lch => {
-                let lch: OpaqueColor<Lch> = hsv.convert();
-                let hue = hsv.components[0];
-                let [l, c, _h] = lch.components;
-                format!("lch({:.2}%, {:.2}, {:.0})", l, c, hue)
+                let lab: Lab<f32, D65> = Lab::from_xyz(&xyz, D65);
+                let lch: Lchab<f32, D65> = Lchab::from_color(&lab);
+                format!(
+                    "lch({:.2}%, {:.2}, {:.0})",
+                    lch.L(),
+                    lch.chroma(),
+                    lch.hue().0
+                )
+            }
+            Self::Xyz => {
+                format!(
+                    "xyz({:.2}%, {:.2}, {:.2})",
+                    xyz.x() * 100.,
+                    xyz.y(),
+                    xyz.z(),
+                )
             }
         }
     }

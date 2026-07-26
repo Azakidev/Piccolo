@@ -10,13 +10,13 @@ use adw::{
     prelude::*,
     subclass::prelude::*,
 };
-use color::OpaqueColor;
+use angular_units::Deg;
+use prisma::Hsv;
 use std::cell::{OnceCell, RefCell};
 
 use crate::{components::color_functions::ColorFormat, window::WindowAction};
 
 mod imp {
-
     use super::*;
 
     #[derive(Default, gtk::CompositeTemplate, Properties)]
@@ -131,7 +131,7 @@ impl PiccoloColorBox {
         let imp = self.imp();
         let function = &imp.function;
 
-        let hsv = OpaqueColor::new([self.h(), self.s(), self.v()]);
+        let hsv = Hsv::new(Deg(self.h() % 360.), self.s(), self.v());
 
         if let Some(format) = imp.color_format.get() {
             let text = format.get_function(hsv);

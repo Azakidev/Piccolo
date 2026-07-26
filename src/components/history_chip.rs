@@ -10,12 +10,12 @@ use adw::{
     prelude::*,
     subclass::prelude::*,
 };
-use color::OpaqueColor;
-
+use prisma::{FromColor, Hsv, Rgb};
+use angular_units::Deg;
 use std::cell::RefCell;
 
 use crate::{
-    components::{color_chip::PiccoloColorChip, history::PiccoloHistory, utils::Hsv},
+    components::{color_chip::PiccoloColorChip, history::PiccoloHistory},
     window::WindowAction,
 };
 
@@ -108,13 +108,11 @@ glib::wrapper! {
 }
 
 impl PiccoloHistoryChip {
-    pub fn new(color: &OpaqueColor<Hsv>) -> Self {
-        let [h, s, v] = color.components;
-
+    pub fn new(color: &Hsv<f32, Deg<f32>>) -> Self {
         let obj: PiccoloHistoryChip = glib::Object::builder()
-            .property("h", h)
-            .property("s", s)
-            .property("v", v)
+            .property("h", color.hue().0)
+            .property("s", color.saturation())
+            .property("v", color.value())
             .build();
 
         obj.set_labels(color);
@@ -130,14 +128,15 @@ impl PiccoloHistoryChip {
         self.bind_property("v", chip, "v").sync_create().build();
     }
 
-    fn set_labels(&self, hsv: &OpaqueColor<Hsv>) {
+    fn set_labels(&self, hsv: &Hsv<f32, Deg<f32>>) {
         let hex_label = &self.imp().hex;
         let rgb_label = &self.imp().rgb;
 
-        let [r, g, b, _] = hsv.to_rgba8().to_u8_array();
+        let rgb = Rgb::from_color(hsv);
+        let rgb: Rgb<u8> = rgb.color_cast();
 
-        let hex = format!("#{:02X}{:02X}{:02X}", r, g, b);
-        let rgb = format!("RGB: {r}, {g}, {b}");
+        let hex = format!("#{:02X}{:02X}{:02X}", rgb.red(), rgb.green(), rgb.blue());
+        let rgb = format!("RGB: {}, {}, {}", rgb.red(), rgb.green(), rgb.blue());
 
         hex_label.set_label(&hex);
         rgb_label.set_label(&rgb);
@@ -179,12 +178,13 @@ impl PiccoloHistoryChip {
 
     fn setup_copy(&self) {
         let copy_button = &self.imp().copy_button;
-        let hsv: OpaqueColor<Hsv> = OpaqueColor::new([self.h(), self.s(), self.v()]);
+        let hsv = Hsv::new(Deg(self.h() % 360.), self.s(), self.v());
+        let rgb = Rgb::from_color(&hsv);
+        let rgb: Rgb<u8> = rgb.color_cast();
+
+        let hex = format!("#{:02X}{:02X}{:02X}", rgb.red(), rgb.green(), rgb.blue());
 
         copy_button.connect_clicked(move |btn| {
-            let [r, g, b, _] = hsv.to_rgba8().to_u8_array();
-            let hex = format!("#{:02X}{:02X}{:02X}", r, g, b);
-
             let _ = btn.activate_action(&WindowAction::ColorCopy, Some(&hex.to_variant()));
         });
     }

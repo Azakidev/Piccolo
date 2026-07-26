@@ -9,20 +9,21 @@ use adw::{
     prelude::{RangeExt, WidgetExt},
     subclass::prelude::*,
 };
-use color::{AlphaColor, Hsl, OpaqueColor};
+use angular_units::{Angle, Deg};
 use gtk::{
     CssProvider, TemplateChild,
     gdk::Display,
     glib::{self, Properties, clone, object::ObjectExt},
     prelude::{EditableExt, GestureDragExt},
 };
+use prisma::{FromColor, Hsl, Hsv, Rgb};
 use std::{
     cell::{Cell, RefCell},
     rc::Rc,
 };
 
 use crate::{
-    components::{color_chip::PiccoloColorChip, utils::Hsv},
+    components::{color_chip::PiccoloColorChip, utils::parse_hex_to_rgb},
     window::WindowAction,
 };
 
@@ -210,7 +211,7 @@ impl PiccoloColorSelector {
                 let imp = obj.imp();
                 let label = &imp.saturation_label;
 
-                label.set_value(val);
+                label.set_value(val * 100.);
 
                 if obj.imp().should_update.get() {
                     obj.update_properties();
@@ -227,7 +228,7 @@ impl PiccoloColorSelector {
                 let slider = &imp.saturation_slider;
                 let val = l.value();
 
-                slider.set_value(val);
+                slider.set_value(val / 100.);
             }
         ));
 
@@ -260,7 +261,7 @@ impl PiccoloColorSelector {
                 let imp = obj.imp();
                 let label = &imp.value_label;
 
-                label.set_value(val);
+                label.set_value(val * 100.);
 
                 if obj.imp().should_update.get() {
                     obj.update_properties();
@@ -277,7 +278,7 @@ impl PiccoloColorSelector {
                 let slider = &imp.value_slider;
                 let val = l.value();
 
-                slider.set_value(val);
+                slider.set_value(val / 100.);
             }
         ));
 
@@ -316,13 +317,15 @@ impl PiccoloColorSelector {
     fn set_hex(&self) {
         let imp = self.imp();
         let hex_label = &imp.hex_label;
-        let color: OpaqueColor<Hsv> = OpaqueColor::new([self.h(), self.s(), self.v()]);
 
-        let [r, g, b, _] = color.to_rgba8().to_u8_array();
-        let text = format!("#{:02X}{:02X}{:02X}", r, g, b);
+        let hsv = Hsv::new(Deg(self.h() % 360.), self.s(), self.v());
+        let rgb = Rgb::from_color(&hsv);
+        let rgb: Rgb<u8> = rgb.color_cast();
+
+        let hex = format!("#{:02X}{:02X}{:02X}", rgb.red(), rgb.green(), rgb.blue());
 
         imp.should_update.set(false);
-        hex_label.set_text(&text);
+        hex_label.set_text(&hex);
         imp.should_update.set(true);
     }
 
@@ -330,30 +333,13 @@ impl PiccoloColorSelector {
         let imp = self.imp();
         let hex_label = &imp.hex_label;
 
-        if hex_label.text().len() < 6 {
-            return;
-        }
-
-        let text = format!(
-            "#{}",
-            hex_label
-                .text()
-                .strip_prefix("#")
-                .unwrap_or(&hex_label.text())
-        );
-
-        if let Ok(color) = color::parse_color(&text) {
-            let rgb: AlphaColor<color::LinearSrgb> = color
-                .convert(color::ColorSpaceTag::LinearSrgb)
-                .to_alpha_color();
-            let hsv: OpaqueColor<Hsv> = rgb.convert().discard_alpha();
-
-            let [h, s, v] = hsv.components;
+        if let Ok(color) = parse_hex_to_rgb(&hex_label.text()) {
+            let hsv: Hsv<f32, Deg<f32>> = Hsv::from_color(&color);
 
             imp.should_update.set(false);
-            self.set_h(h);
-            self.set_s(s);
-            self.set_v(v);
+            self.set_h(hsv.hue().0);
+            self.set_s(hsv.saturation());
+            self.set_v(hsv.value());
             self.update_properties();
             let _ = self.activate_action(&WindowAction::ColorSave, None);
             imp.should_update.set(true);
@@ -373,7 +359,7 @@ impl PiccoloColorSelector {
     fn update_properties(&self) {
         let provider = self.imp().css_provider.borrow();
 
-        let hsv: OpaqueColor<Hsv> = OpaqueColor::new([self.h(), self.s(), self.v()]);
+        let hsv: Hsv<f32, Deg<f32>> = Hsv::new(Deg(self.h() % 360.), self.s(), self.v());
 
         let sat = make_saturation_gradient(hsv);
         let val = make_value_gradient(hsv);
@@ -385,28 +371,32 @@ impl PiccoloColorSelector {
     }
 }
 
-fn make_saturation_gradient(hsv: OpaqueColor<Hsv>) -> String {
-    let [h, _, hsv_v] = hsv.components;
+fn make_saturation_gradient(hsv: Hsv<f32, Deg<f32>>) -> String {
+    let (h, hsv_v) = (hsv.hue().0, hsv.value());
 
-    let full_hsv: OpaqueColor<Hsv> = OpaqueColor::new([h, 100f32, hsv_v]);
-    let full_hsl: OpaqueColor<Hsl> = full_hsv.convert();
+    let full_hsv: Hsv<f32, Deg<f32>> = Hsv::new(Deg(h % 360.), 1f32, hsv_v);
 
-    let [_, _, l] = full_hsl.components;
+    let rgb = Rgb::from_color(&full_hsv);
+    let full_hsl: Hsl<f32, Deg<f32>> = Hsl::from_color(&rgb);
+
+    let v = hsv_v * 100f32;
+    let l = full_hsl.lightness() * 100f32;
 
     format!(
         "linear-gradient(to right, \
-         hsl({h}, 0%, {hsv_v}%), \
+         hsl({h}, 0%, {v}%), \
          hsl({h}, 100%, {l}%))"
     )
 }
 
-fn make_value_gradient(hsv: OpaqueColor<Hsv>) -> String {
-    let [h, hsv_s, _] = hsv.components;
+fn make_value_gradient(hsv: Hsv<f32, Deg<f32>>) -> String {
+    let (h, hsv_s) = (hsv.hue().0, hsv.saturation());
 
-    let full_hsv: OpaqueColor<Hsv> = OpaqueColor::new([h, hsv_s, 100f32]);
-    let full_hsl: OpaqueColor<Hsl> = full_hsv.convert();
+    let full_hsv: Hsv<f32, Deg<f32>> = Hsv::new(Deg(h % 360.), hsv_s, 1f32);
+    let rgb = Rgb::from_color(&full_hsv);
+    let full_hsl: Hsl<f32, Deg<f32>> = Hsl::from_color(&rgb);
 
-    let [_, s, l] = full_hsl.components;
+    let (s, l) = (full_hsl.saturation() * 100f32, full_hsl.lightness() * 100f32);
 
     format!(
         "linear-gradient(to right, \

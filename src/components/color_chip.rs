@@ -10,13 +10,14 @@ use adw::{
     prelude::*,
     subclass::prelude::*,
 };
-use color::OpaqueColor;
+use angular_units::Deg;
+use prisma::Hsv;
 use gtk::{graphene, gsk::RoundedRect};
 use std::cell::RefCell;
 
-use crate::components::utils::{Hsv, to_rgba};
-
 mod imp {
+    use crate::components::utils::to_rgba;
+
     use super::*;
 
     #[derive(Default, Properties)]
@@ -72,7 +73,7 @@ mod imp {
     impl WidgetImpl for PiccoloColorChip {
         fn snapshot(&self, snapshot: &gtk::Snapshot) {
             let obj = self.obj();
-            let hsv: OpaqueColor<Hsv> = OpaqueColor::new([obj.h(), obj.s(), obj.v()]);
+            let hsv: Hsv<f32, Deg<f32>> = Hsv::new(Deg(obj.h() % 360.), obj.s(), obj.v());
             let color = to_rgba(&hsv);
 
             let width = self.obj().width() as f32;

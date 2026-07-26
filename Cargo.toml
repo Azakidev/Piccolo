@@ -4,7 +4,9 @@ version = "0.2.0"
 edition = "2024"
 
 [dependencies]
-color = { version = "0.3" }
+prisma = { version = "0.1" }
+angular-units = { version = "0.2" }
+oklab = { version = "1.1" }
 ashpd = { version = "0.13", default-features = false, features = [
     "gtk4",
     "async-io",

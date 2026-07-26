@@ -12,8 +12,9 @@ use adw::{
     subclass::prelude::*,
 };
 use ashpd::desktop::Color;
-use color::{LinearSrgb, OpaqueColor};
 use gtk::gdk;
+use prisma::{FromColor, Hsv, Rgb};
+use angular_units::Deg;
 use std::{
     cell::RefCell,
     ops::{Deref, Sub},
@@ -23,14 +24,13 @@ use strum::IntoEnumIterator;
 use crate::{
     components::{
         color_box::PiccoloColorBox, color_functions::ColorFormat,
-        color_selector::PiccoloColorSelector, color_wheel::PiccoloColorWheel, utils::Hsv,
+        color_selector::PiccoloColorSelector, color_wheel::PiccoloColorWheel,
+        history::PiccoloHistory,
     },
     config,
 };
 
 mod imp {
-
-    use crate::components::history::PiccoloHistory;
 
     use super::*;
 
@@ -204,17 +204,17 @@ impl PiccoloWindow {
     }
 
     fn set_color(&self, color: Color) {
-        let col: OpaqueColor<LinearSrgb> = OpaqueColor::new([
+        let col = Rgb::new(
             color.red() as f32,
             color.green() as f32,
             color.blue() as f32,
-        ]);
+        );
 
-        let hsv: OpaqueColor<Hsv> = col.convert();
+        let hsv: Hsv<f32, Deg<f32>> = Hsv::from_color(&col);
 
-        self.set_h(hsv.components[0]);
-        self.set_s(hsv.components[1]);
-        self.set_v(hsv.components[2]);
+        self.set_h(hsv.hue().0);
+        self.set_s(hsv.saturation());
+        self.set_v(hsv.value());
 
         self.save_color();
     }
@@ -249,7 +249,7 @@ impl PiccoloWindow {
     }
 
     fn save_color(&self) {
-        let hsv = OpaqueColor::new([self.h(), self.s(), self.v()]);
+        let hsv = Hsv::new(Deg(self.h() % 360.), self.s(), self.v());
 
         self.imp().history.add_chip(&hsv);
     }
@@ -265,10 +265,11 @@ impl PiccoloWindow {
     fn copy_color(&self, content: Option<String>) {
         let clipboard = self.clipboard();
 
-        let hsv: OpaqueColor<Hsv> = OpaqueColor::new([self.h(), self.s(), self.v()]);
+        let hsv = Hsv::new(Deg(self.h() % 360.), self.s(), self.v());
+        let rgb = Rgb::from_color(&hsv);
+        let rgb: Rgb<u8> = rgb.color_cast();
 
-        let [r, g, b, _] = hsv.to_rgba8().to_u8_array();
-        let hex = format!("#{:02X}{:02X}{:02X}", r, g, b);
+        let hex = format!("#{:02X}{:02X}{:02X}", rgb.red(), rgb.green(), rgb.blue());
 
         let text = content.unwrap_or(hex);
         clipboard.set_text(&text);

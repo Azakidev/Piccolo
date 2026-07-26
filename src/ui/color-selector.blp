@@ -70,15 +70,15 @@ template $PiccoloColorSelector: Box {
                 draw-value: false;
                 value-pos: right;
                 can-focus: false;
-                round-digits: 0;
+                round-digits: 2;
                 tooltip-text: _("Saturation");
 
                 adjustment: Gtk.Adjustment saturation_a {
                     lower: 0;
-                    upper: 100;
+                    upper: 1;
                     value: 0;
-                    step-increment: 0.05;
-                    page-increment: 0.05;
+                    step-increment: 0.001;
+                    page-increment: 0.005;
                     page-size: 0;
                 };
 
@@ -121,15 +121,15 @@ template $PiccoloColorSelector: Box {
                 draw-value: false;
                 value-pos: right;
                 can-focus: false;
-                round-digits: 0;
+                round-digits: 2;
                 tooltip-text: _("Value");
 
                 adjustment: Gtk.Adjustment value_a {
                     lower: 0;
-                    upper: 100;
+                    upper: 1;
                     value: 0;
-                    step-increment: 0.05;
-                    page-increment: 0.05;
+                    step-increment: 0.001;
+                    page-increment: 0.005;
                     page-size: 0;
                 };
 

@@ -11,10 +11,11 @@ use adw::{
     prelude::*,
     subclass::prelude::*,
 };
-use color::OpaqueColor;
+use prisma::Hsv;
+use angular_units::Deg;
 use std::cell::RefCell;
 
-use crate::components::{history_chip::PiccoloHistoryChip, utils::Hsv};
+use crate::components::{history_chip::PiccoloHistoryChip};
 
 mod imp {
 
@@ -31,7 +32,7 @@ mod imp {
         #[template_child]
         pub scroller: TemplateChild<gtk::EventControllerScroll>,
 
-        pub recent_colors: RefCell<Vec<OpaqueColor<Hsv>>>,
+        pub recent_colors: RefCell<Vec<prisma::Hsv<f32, Deg<f32>>>>,
     }
 
     #[glib::object_subclass]
@@ -83,7 +84,7 @@ impl PiccoloHistory {
         glib::Object::new()
     }
 
-    pub fn add_chip(&self, color: &OpaqueColor<Hsv>) {
+    pub fn add_chip(&self, color: &Hsv<f32, Deg<f32>>) {
         let chip = PiccoloHistoryChip::new(color);
         let mut recents = self.imp().recent_colors.borrow_mut();
 
@@ -97,7 +98,7 @@ impl PiccoloHistory {
     }
 
     pub fn remove_chip(&self, chip: &PiccoloHistoryChip) {
-        let col = OpaqueColor::new([chip.h(), chip.s(), chip.v()]);
+        let col = Hsv::new(Deg(chip.h() % 360.), chip.s(), chip.v());
         let mut recents = self.imp().recent_colors.borrow_mut();
 
         if let Some(index) = recents.iter().position(|c| c == &col) {
