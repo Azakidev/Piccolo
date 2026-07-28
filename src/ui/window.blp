@@ -5,12 +5,41 @@ template $PiccoloWindow: Adw.ApplicationWindow {
     title: _("Piccolo");
     default-width: 650;
     default-height: 350;
-    width-request: 550;
+    width-request: 330;
     height-request: 300;
+
+    Adw.Breakpoint {
+        condition ("max-width: 705px")
+
+        setters {
+            left_split.collapsed: true;
+        }
+    }
+
+    Adw.Breakpoint {
+        condition ("max-width: 549px")
+
+        setters {
+            selector_box.orientation: vertical;
+            selector_box.height-request: 470;
+            left_split.collapsed: true;
+        }
+    }
+
+    Adw.Breakpoint {
+        condition ("max-width: 549px and max-height: 548px")
+
+        setters {
+            selector.visible: false;
+            left_split.collapsed: true;
+        }
+    }
 
     content: Adw.ToastOverlay toast_overlay {
         child: Adw.OverlaySplitView left_split {
             sidebar-position: start;
+            collapsed: false;
+            show-sidebar: false;
 
             sidebar: Adw.NavigationPage {
                 title: _("Color formats");
@@ -80,7 +109,7 @@ template $PiccoloWindow: Adw.ApplicationWindow {
                     Adw.ViewStackPage picker_page {
                         name: "picker_page";
 
-                        child: Box {
+                        child: Box selector_box {
                             orientation: horizontal;
                             valign: fill;
                             vexpand: true;
@@ -104,8 +133,10 @@ template $PiccoloWindow: Adw.ApplicationWindow {
                             }
                         };
                     }
+
                     Adw.ViewStackPage history_page {
                         name: "history_page";
+
                         child: $PiccoloHistory history {};
                     }
                 };

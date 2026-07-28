@@ -53,7 +53,7 @@ mod imp {
     impl ObjectSubclass for PiccoloHistoryChip {
         const NAME: &'static str = "PiccoloHistoryChip";
         type Type = super::PiccoloHistoryChip;
-        type ParentType = adw::Bin;
+        type ParentType = adw::BreakpointBin;
 
         fn new() -> Self {
             Self {
@@ -98,12 +98,12 @@ mod imp {
     }
 
     impl WidgetImpl for PiccoloHistoryChip {}
-    impl BinImpl for PiccoloHistoryChip {}
+    impl BreakpointBinImpl for PiccoloHistoryChip {}
 }
 
 glib::wrapper! {
     pub struct PiccoloHistoryChip(ObjectSubclass<imp::PiccoloHistoryChip>)
-        @extends gtk::Widget, adw::Bin,
+        @extends gtk::Widget, adw::BreakpointBin,
         @implements gtk::Native, gtk::Root, gtk::ShortcutManager, gtk::Accessible, gtk::Buildable, gtk::ConstraintTarget;
 }
 

@@ -27,6 +27,16 @@
 
     <content_rating type="oars-1.1" />
 
+    <supports>
+        <control>keyboard</control>
+        <control>pointing</control>
+        <control>touch</control>
+    </supports>
+
+    <requires>
+        <display_length compare="ge">330</display_length>
+    </requires>
+
     <branding>
         <color type="primary" scheme_preference="light">#61bf6f</color>
         <color type="primary" scheme_preference="dark">#27472b</color>

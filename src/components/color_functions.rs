@@ -66,26 +66,26 @@ impl ColorFormat {
                 let hsl: Hsl<f32, Deg<f32>> = Hsl::from_color(&rgb);
                 format!(
                     "hsl({:.0}, {:.2}%, {:.2}%)",
-                    hsl.hue().0,
-                    hsl.saturation() * 100.,
-                    hsl.lightness() * 100.
+                    hsl.hue().0.clamp(0., 360.),
+                    (hsl.saturation() * 100.).clamp(0., 100.),
+                    (hsl.lightness() * 100.).clamp(0., 100.)
                 )
             }
             Self::Hsv => {
                 format!(
                     "hsv({:.0}, {:.2}%, {:.2}%)",
-                    hsv.hue().0,
-                    hsv.saturation() * 100.,
-                    hsv.value() * 100.
+                    hsv.hue().0.clamp(0., 360.),
+                    (hsv.saturation() * 100.).clamp(0., 100.),
+                    (hsv.value() * 100.).clamp(0., 100.)
                 )
             }
             Self::Hwb => {
                 let hwb: Hwb<f32, Deg<f32>> = Hwb::from_color(&rgb);
                 format!(
                     "hwb({:.0}, {:.2}%, {:.2}%)",
-                    hwb.hue().0,
-                    hwb.whiteness() * 100.,
-                    hwb.blackness() * 100.
+                    hwb.hue().0.clamp(0., 360.),
+                    (hwb.whiteness() * 100.).clamp(0., 100.),
+                    (hwb.blackness() * 100.).clamp(0., 100.)
                 )
             }
             Self::Oklab => {
@@ -96,7 +96,7 @@ impl ColorFormat {
                 });
                 format!(
                     "oklab({:.2}%, {:.2}, {:.2})",
-                    oklab.l * 100.,
+                    (oklab.l * 100.).clamp(0., 100.),
                     oklab.a,
                     oklab.b
                 )
@@ -117,24 +117,29 @@ impl ColorFormat {
             }
             Self::Lab => {
                 let lab: Lab<f32, D65> = Lab::from_xyz(&xyz, D65);
-                format!("lab({:.2}%, {:.2}, {:.2})", lab.L(), lab.a(), lab.b())
+                format!(
+                    "lab({:.2}%, {:.2}, {:.2})",
+                    lab.L().clamp(0., 100.),
+                    lab.a().clamp(0., 100.),
+                    lab.b().clamp(0., 100.)
+                )
             }
             Self::Lch => {
                 let lab: Lab<f32, D65> = Lab::from_xyz(&xyz, D65);
                 let lch: Lchab<f32, D65> = Lchab::from_color(&lab);
                 format!(
                     "lch({:.2}%, {:.2}, {:.0})",
-                    lch.L(),
-                    lch.chroma(),
-                    lch.hue().0
+                    lch.L().clamp(0., 100.),
+                    lch.chroma().clamp(0., 100.),
+                    lch.hue().0.clamp(0., 360.)
                 )
             }
             Self::Xyz => {
                 format!(
                     "xyz({:.2}%, {:.2}, {:.2})",
-                    xyz.x() * 100.,
-                    xyz.y(),
-                    xyz.z(),
+                    (xyz.x() * 100.).clamp(0., 100.),
+                    xyz.y().clamp(0., 1.),
+                    xyz.z().clamp(0., 2.),
                 )
             }
         }

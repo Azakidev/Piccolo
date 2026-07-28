@@ -235,11 +235,11 @@ impl PiccoloColorWheel {
                 if obj.test_triangle((x, y)) {
                     let (w1, w2, w3) = obj.to_triangle_coords((x, y));
 
-                    let s = (w3 / (w2 + w3)) * 100f32;
-                    let v = 100f32 - (w1 * 100f32);
+                    let s = w3 / (w2 + w3);
+                    let v = 1f32 - w1;
 
-                    obj.set_s(s.clamp(0f32, 100f32));
-                    obj.set_v(v.clamp(0f32, 100f32));
+                    obj.set_s(s.clamp(0f32, 1f32));
+                    obj.set_v(v.clamp(0f32, 1f32));
                 }
             }
         ));
