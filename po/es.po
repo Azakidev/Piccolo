@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: piccolo\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-07-29 02:00+0200\n"
-"PO-Revision-Date: 2026-07-29 02:01+0200\n"
+"POT-Creation-Date: 2026-07-29 14:01+0200\n"
+"PO-Revision-Date: 2026-07-29 14:06+0200\n"
 "Last-Translator: FatDawlf <zazaguichi@outlook.com>\n"
 "Language-Team: Spanish\n"
 "Language: es\n"
@@ -56,9 +56,21 @@ msgid "The page displaying the history of picked colors in a session."
 msgstr ""
 "La página mostrando el historial de colores seleccionados en una sesión."
 
+#: data/art.fatdawlf.Piccolo.metainfo.xml.in:60
+msgid ""
+"The main page in it's most compact form, showing only the color wheel and "
+"top bar."
+msgstr ""
+"La página principal en su formato más compacto, mostrando solo la rueda de "
+"color."
+
+#: data/art.fatdawlf.Piccolo.metainfo.xml.in:64
+msgid "The main page in the mobile-friendly vertical format."
+msgstr "La página principal en su formato vertical compatible con móviles."
+
 #: src/ui/color-box.blp:24
 msgid "Copy the color"
-msgstr "Copia el colr"
+msgstr "Copia el color"
 
 #: src/ui/color-selector.blp:22 src/ui/color-selector.blp:45
 msgid "Hue"
@@ -113,7 +125,7 @@ msgstr "Cerrar"
 #: src/ui/shortcuts-dialog.blp:19
 msgctxt "shortcut window"
 msgid "Pick a color"
-msgstr "Selecciona el color"
+msgstr "Selecciona un color"
 
 #: src/ui/shortcuts-dialog.blp:25
 msgctxt "shortcut window"

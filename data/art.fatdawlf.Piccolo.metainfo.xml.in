@@ -55,9 +55,27 @@
             <image>https://raw.githubusercontent.com/Azakidev/Piccolo/refs/heads/main/dist/ss/3.png</image>
             <caption>The page displaying the history of picked colors in a session.</caption>
         </screenshot>
+        <screenshot xml:lang="en">
+            <image>https://raw.githubusercontent.com/Azakidev/Piccolo/refs/heads/main/dist/ss/4.png</image>
+            <caption>The main page in it's most compact form, showing only the color wheel and top bar.</caption>
+        </screenshot>
+        <screenshot xml:lang="en">
+            <image>https://raw.githubusercontent.com/Azakidev/Piccolo/refs/heads/main/dist/ss/5.png</image>
+            <caption>The main page in the mobile-friendly vertical format.</caption>
+        </screenshot>
     </screenshots>
 
     <releases>
+        <release version="0.3.0" date="2026-07-29">
+            <url type="details">https://github.com/Azakidev/Piccolo/releases/tag/0.3.0</url>
+            <description translate="no">
+                <p>Changelog:</p>
+                <ul>
+                    <li>Made the UI addaptive and usable on phones and tablets</li>
+                    <li>Added translation support and localized the app to Spanish</li>
+                </ul>
+            </description>
+        </release>
         <release version="0.2.1" date="2026-07-26">
             <url type="details">https://github.com/Azakidev/Piccolo/releases/tag/0.2.1</url>
             <description translate="no">
