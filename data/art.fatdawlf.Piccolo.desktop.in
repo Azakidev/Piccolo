@@ -1,12 +1,12 @@
 [Desktop Entry]
-x-gettext-Name=Piccolo
+Name=Piccolo
 Exec=piccolo
 Icon=art.fatdawlf.Piccolo
 Terminal=false
 
 Type=Application
 Categories=Utility;Graphics;
-x-gettext-Keywords=GTK;Color;Picker;Palette;CSS;HSV
+Keywords=GTK;Color;Picker;Palette;CSS;HSV
 
 StartupNotify=false
 DBusActivatable=true
