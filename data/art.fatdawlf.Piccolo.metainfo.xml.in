@@ -71,7 +71,7 @@
             <description translate="no">
                 <p>Changelog:</p>
                 <ul>
-                    <li>Made the UI fully navigatable with a keyboard</li>
+                    <li>Made the UI fully navigable with a keyboard</li>
                     <li>Made the UI adaptive and usable on phones and tablets</li>
                     <li>Added translation support and localized the app to Spanish</li>
                 </ul>

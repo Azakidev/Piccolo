@@ -17,7 +17,6 @@ template $PiccoloColorSelector: Box {
                 hexpand: true;
                 draw-value: false;
                 value-pos: right;
-                can-focus: false;
                 round-digits: 0;
                 tooltip-text: _("Hue");
 
@@ -69,7 +68,6 @@ template $PiccoloColorSelector: Box {
                 hexpand: true;
                 draw-value: false;
                 value-pos: right;
-                can-focus: false;
                 round-digits: 2;
                 tooltip-text: _("Saturation");
 
@@ -77,8 +75,8 @@ template $PiccoloColorSelector: Box {
                     lower: 0;
                     upper: 1;
                     value: 0;
-                    step-increment: 0.001;
-                    page-increment: 0.005;
+                    step-increment: 0.01;
+                    page-increment: 0.05;
                     page-size: 0;
                 };
 
@@ -120,7 +118,6 @@ template $PiccoloColorSelector: Box {
                 hexpand: true;
                 draw-value: false;
                 value-pos: right;
-                can-focus: false;
                 round-digits: 2;
                 tooltip-text: _("Value");
 
@@ -128,8 +125,8 @@ template $PiccoloColorSelector: Box {
                     lower: 0;
                     upper: 1;
                     value: 0;
-                    step-increment: 0.001;
-                    page-increment: 0.005;
+                    step-increment: 0.01;
+                    page-increment: 0.05;
                     page-size: 0;
                 };
 
