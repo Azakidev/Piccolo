@@ -1,13 +1,14 @@
 using Gtk 4.0;
-using Adw 1;
 
-template $PiccoloColorBox: Adw.Bin {
+template $PiccoloColorBox: Button {
     hexpand: true;
+    focusable: true;
 
     styles [
         "card",
-        "activatable"
     ]
+
+    accessible-role: button;
 
     Box {
         orientation: horizontal;
@@ -17,6 +18,7 @@ template $PiccoloColorBox: Adw.Bin {
         margin-end: 8;
 
         Image {
+            margin-start: 8;
             icon-name: "copy-symbolic";
             pixel-size: 24;
 

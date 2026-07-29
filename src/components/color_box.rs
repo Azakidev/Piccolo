@@ -43,7 +43,7 @@ mod imp {
     impl ObjectSubclass for PiccoloColorBox {
         const NAME: &'static str = "PiccoloColorBox";
         type Type = super::PiccoloColorBox;
-        type ParentType = adw::Bin;
+        type ParentType = gtk::Button;
 
         fn new() -> Self {
             Self {
@@ -86,13 +86,13 @@ mod imp {
         }
     }
     impl WidgetImpl for PiccoloColorBox {}
-    impl BinImpl for PiccoloColorBox {}
+    impl ButtonImpl for PiccoloColorBox {}
 }
 
 glib::wrapper! {
     pub struct PiccoloColorBox(ObjectSubclass<imp::PiccoloColorBox>)
-        @extends gtk::Widget, adw::Bin,
-        @implements gtk::Accessible, gtk::Buildable, gtk::ConstraintTarget;
+        @extends gtk::Widget, gtk::Button,
+        @implements gtk::Accessible, gtk::Buildable, gtk::ConstraintTarget, gtk::Actionable;
 }
 
 impl PiccoloColorBox {
@@ -100,6 +100,8 @@ impl PiccoloColorBox {
         let obj: Self = glib::Object::new();
 
         obj.imp().format.set_text(&format);
+
+        obj.set_tooltip_text(Some(&format));
 
         if let Err(e) = obj.imp().color_format.set(format) {
             eprintln!("Error setting color format: {e}");
@@ -140,17 +142,13 @@ impl PiccoloColorBox {
     }
 
     fn setup_click(&self) {
-        let controller = gtk::GestureClick::new();
-
-        controller.connect_released(glib::clone!(
+        self.connect_clicked(glib::clone!(
             #[weak(rename_to = obj)]
             self,
-            move |_, _, _, _| {
+            move |_| {
                 let function = obj.imp().function.text().to_string();
                 let _ = obj.activate_action(&WindowAction::ColorCopy, Some(&function.to_variant()));
             }
         ));
-
-        self.add_controller(controller);
     }
 }

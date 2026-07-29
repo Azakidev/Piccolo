@@ -16,15 +16,21 @@ Adw.ShortcutsDialog shortcuts_dialog {
     }
 
     Adw.ShortcutsItem {
-      title: C_("shortcut window", "Pick a color");
+      title: C_("shortcut window", "Pick a Color");
       action-name: "win.pick-color";
       accelerator: "P";
     }
 
     Adw.ShortcutsItem {
-      title: C_("shortcut window", "Toggle the sidebar");
+      title: C_("shortcut window", "Toggle the Sidebar");
       action-name: "win.toggle-sidebar";
       accelerator: "<Ctrl>S";
+    }
+
+    Adw.ShortcutsItem {
+      title: C_("shortcut window", "Toggle the History");
+      action-name: "win.toggle-history";
+      accelerator: "<Ctrl>H";
     }
   }
 }

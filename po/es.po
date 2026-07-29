@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: piccolo\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-07-29 14:01+0200\n"
-"PO-Revision-Date: 2026-07-29 14:06+0200\n"
+"POT-Creation-Date: 2026-07-29 15:11+0200\n"
+"PO-Revision-Date: 2026-07-29 15:12+0200\n"
 "Last-Translator: FatDawlf <zazaguichi@outlook.com>\n"
 "Language-Team: Spanish\n"
 "Language: es\n"
@@ -68,7 +68,7 @@ msgstr ""
 msgid "The main page in the mobile-friendly vertical format."
 msgstr "La página principal en su formato vertical compatible con móviles."
 
-#: src/ui/color-box.blp:24
+#: src/ui/color-box.blp:26
 msgid "Copy the color"
 msgstr "Copia el color"
 
@@ -96,15 +96,15 @@ msgstr "Código hexadecimal del color"
 msgid "No colors have been yet picked."
 msgstr "No se ha seleccionado ningún color."
 
-#: src/ui/history-chip.blp:36
+#: src/ui/history-chip.blp:34
 msgid "Select color"
 msgstr "Selecciona el color"
 
-#: src/ui/history-chip.blp:92
+#: src/ui/history-chip.blp:91
 msgid "Copy color"
 msgstr "Copiar color"
 
-#: src/ui/history-chip.blp:102
+#: src/ui/history-chip.blp:101
 msgid "Remove chip"
 msgstr "Eliminar color"
 
@@ -124,13 +124,18 @@ msgstr "Cerrar"
 
 #: src/ui/shortcuts-dialog.blp:19
 msgctxt "shortcut window"
-msgid "Pick a color"
-msgstr "Selecciona un color"
+msgid "Pick a Color"
+msgstr "Selecciona un Color"
 
 #: src/ui/shortcuts-dialog.blp:25
 msgctxt "shortcut window"
-msgid "Toggle the sidebar"
-msgstr "Alterna la barra lateral"
+msgid "Toggle the Sidebar"
+msgstr "Alterna la Barra Lateral"
+
+#: src/ui/shortcuts-dialog.blp:31
+msgctxt "shortcut window"
+msgid "Toggle the History"
+msgstr "Alterna el Historial de Colores"
 
 #: src/ui/window.blp:45
 msgid "Color formats"
@@ -168,10 +173,10 @@ msgstr "_Sobre Piccolo"
 msgid "Copied color"
 msgstr "Color copiado"
 
-#: src/window.rs:372
+#: src/window.rs:374
 msgid "Selected color"
 msgstr "Color seleccionado"
 
 #~ msgctxt "shortcut window"
-#~ msgid "Pick a Color"
-#~ msgstr "Selecciona un Color"
+#~ msgid "Pick a color"
+#~ msgstr "Selecciona un color"

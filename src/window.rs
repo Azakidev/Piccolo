@@ -318,6 +318,8 @@ pub enum WindowAction {
     FocusClear,
     #[strum(to_string = "win.toggle-sidebar")]
     SidebarToggle,
+    #[strum(to_string = "win.toggle-history")]
+    HistoryToggle,
 }
 
 impl Deref for WindowAction {
@@ -400,6 +402,14 @@ impl WindowAction {
                     });
 
                     klass.add_binding_action(gdk::Key::S, gdk::ModifierType::CONTROL_MASK, &action);
+                }
+                Self::HistoryToggle => {
+                    klass.install_action(&action, None, |win, _, _| {
+                        let history_toggle = &win.imp().history_toggle;
+                        history_toggle.set_active(!history_toggle.is_active());
+                    });
+
+                    klass.add_binding_action(gdk::Key::H, gdk::ModifierType::CONTROL_MASK, &action);
                 }
             }
         }

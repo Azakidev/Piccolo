@@ -28,7 +28,7 @@ mod imp {
     pub struct PiccoloHistoryChip {
         // Children
         #[template_child]
-        pub container: TemplateChild<gtk::Box>,
+        pub container: TemplateChild<gtk::Button>,
         #[template_child]
         pub chip: TemplateChild<PiccoloColorChip>,
         #[template_child]
@@ -144,20 +144,22 @@ impl PiccoloHistoryChip {
 
     fn setup_click(&self) {
         let container = &self.imp().container;
-        let controller = gtk::GestureClick::new();
 
-        controller.set_propagation_phase(gtk::PropagationPhase::Bubble);
-        controller.set_propagation_limit(gtk::PropagationLimit::SameNative);
+        let controllers = container.observe_controllers();
 
-        controller.connect_released(glib::clone!(
+        for i in 0..controllers.n_items() {
+            if let Some(controller) = controllers.item(i).and_downcast::<gtk::GestureClick>() {
+                controller.set_propagation_phase(gtk::PropagationPhase::Bubble);
+            }
+        }
+
+        container.connect_clicked(glib::clone!(
             #[weak(rename_to = obj)]
             self,
-            move |_, _, _, _| {
+            move |_| {
                 obj.chip_selected();
             }
         ));
-
-        container.add_controller(controller);
     }
 
     fn setup_remove(&self) {

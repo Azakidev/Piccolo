@@ -21,8 +21,7 @@ template $PiccoloHistoryChip: Adw.BreakpointBin {
         maximum-size: 190;
         unit: px;
 
-        child: Box container {
-            orientation: vertical;
+        child: Button container {
             margin-top: 4;
             margin-bottom: 4;
             margin-start: 4;
@@ -30,77 +29,78 @@ template $PiccoloHistoryChip: Adw.BreakpointBin {
 
             styles [
                 "card",
-                "activatable",
             ]
 
             tooltip-text: _("Select color");
-            accessible-role: button;
-            focusable: true;
 
-            Box info {
+            Box {
                 orientation: vertical;
 
-                Adw.Clamp chip_clamp {
-                    margin-top: 12;
-                    margin-start: 12;
-                    margin-end: 12;
-                    unit: px;
+                Box info {
                     orientation: vertical;
-                    height-request: 160;
 
-                    $PiccoloColorChip chip {
-                        vexpand: true;
+                    Adw.Clamp chip_clamp {
+                        margin-top: 12;
+                        margin-start: 12;
+                        margin-end: 12;
+                        unit: px;
+                        orientation: vertical;
+                        height-request: 160;
+
+                        $PiccoloColorChip chip {
+                            vexpand: true;
+                        }
+                    }
+
+                    Box labels {
+                        orientation: vertical;
+                        spacing: 4;
+                        margin-top: 8;
+                        margin-bottom: 8;
+
+                        Label hex {
+                            vexpand: true;
+                            valign: end;
+                        }
+
+                        Label rgb {
+                            styles [
+                                "subtext",
+                            ]
+                        }
                     }
                 }
 
-                Box labels {
-                    orientation: vertical;
-                    spacing: 4;
-                    margin-top: 8;
+                Box action_buttons {
+                    orientation: horizontal;
                     margin-bottom: 8;
+                    margin-start: 8;
+                    margin-end: 8;
+                    vexpand: true;
+                    valign: end;
 
-                    Label hex {
-                        vexpand: true;
-                        valign: end;
-                    }
+                    styles [
+                        "linked",
+                    ]
 
-                    Label rgb {
+                    Button copy_button {
                         styles [
-                            "subtext",
+                            "pill",
                         ]
+
+                        tooltip-text: _("Copy color");
+                        icon-name: "copy-symbolic";
                     }
-                }
-            }
 
-            Box action_buttons {
-                orientation: horizontal;
-                margin-bottom: 8;
-                margin-start: 8;
-                margin-end: 8;
-                vexpand: true;
-                valign: end;
+                    Button remove_button {
+                        styles [
+                            "destructive-action",
+                            "pill",
+                        ]
 
-                styles [
-                    "linked",
-                ]
-
-                Button copy_button {
-                    styles [
-                        "pill",
-                    ]
-
-                    tooltip-text: _("Copy color");
-                    icon-name: "copy-symbolic";
-                }
-
-                Button remove_button {
-                    styles [
-                        "destructive-action",
-                        "pill",
-                    ]
-
-                    tooltip-text: _("Remove chip");
-                    icon-name: "user-trash-symbolic";
+                        tooltip-text: _("Remove chip");
+                        icon-name: "user-trash-symbolic";
+                    }
                 }
             }
         };
