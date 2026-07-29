@@ -4,7 +4,7 @@
     <metadata_license>CC0-1.0</metadata_license>
     <project_license>MIT</project_license>
 
-    <name>Piccolo</name>
+    <name translate="no">Piccolo</name>
     <summary>Color picking with style</summary>
     <description>
         <p>Piccolo is an easy to use color picker and selector, inspired by the venerable gcolor3
@@ -14,7 +14,7 @@
     </description>
 
     <developer id="art.fatdawlf">
-        <name>FatDawlf</name>
+        <name translate="no">FatDawlf</name>
     </developer>
 
     <url type="homepage">https://github.com/Azakidev/Piccolo</url>
@@ -45,11 +45,11 @@
     <screenshots>
         <screenshot type="default" xml:lang="en">
             <image>https://raw.githubusercontent.com/Azakidev/Piccolo/refs/heads/main/dist/ss/1.png</image>
-            <caption>The main page of the application</caption>
+            <caption>The main page of the application.</caption>
         </screenshot>
         <screenshot xml:lang="en">
             <image>https://raw.githubusercontent.com/Azakidev/Piccolo/refs/heads/main/dist/ss/2.png</image>
-            <caption>The main page of the application with the sidebar expanded</caption>
+            <caption>The main page of the application with the sidebar expanded.</caption>
         </screenshot>
         <screenshot xml:lang="en">
             <image>https://raw.githubusercontent.com/Azakidev/Piccolo/refs/heads/main/dist/ss/3.png</image>

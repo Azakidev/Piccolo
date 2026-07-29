@@ -4,6 +4,7 @@ using Adw 1;
 template $PiccoloHistoryChip: Adw.BreakpointBin {
     vexpand: true;
     width-request: 190;
+    height-request: 200;
 
     Adw.Breakpoint {
         condition ("max-height: 341px")
@@ -61,15 +62,12 @@ template $PiccoloHistoryChip: Adw.BreakpointBin {
                     Label hex {
                         vexpand: true;
                         valign: end;
-                        label: _("Hex code here");
                     }
 
                     Label rgb {
                         styles [
                             "subtext",
                         ]
-
-                        label: _("RGB values here");
                     }
                 }
             }

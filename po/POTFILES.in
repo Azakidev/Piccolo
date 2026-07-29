@@ -8,5 +8,9 @@ data/art.fatdawlf.Piccolo.gschema.xml
 # UI
 src/ui/color-box.blp
 src/ui/color-selector.blp
+src/ui/history.blp
+src/ui/history-chip.blp
 src/ui/shortcuts-dialog.blp
 src/ui/window.blp
+# Code
+src/window.rs

@@ -13,6 +13,7 @@ use adw::{
 };
 use angular_units::Deg;
 use ashpd::desktop::Color;
+use gettextrs::gettext;
 use gtk::gdk;
 use prisma::{FromColor, Hsv, Rgb};
 use std::{
@@ -274,7 +275,7 @@ impl PiccoloWindow {
         let text = content.unwrap_or(hex);
         clipboard.set_text(&text);
 
-        self.emit_toast("Copied color");
+        self.emit_toast(&gettext("Copied color"));
     }
 
     fn setup_boxes(&self) {
@@ -368,7 +369,7 @@ impl WindowAction {
                                 win.set_s(s as f32);
                                 win.set_v(v as f32);
 
-                                win.emit_toast("Selected color");
+                                win.emit_toast(&gettext("Selected color"));
 
                                 win.imp().stack.set_visible_child_name("picker_page");
                                 win.imp().history_toggle.set_active(false);

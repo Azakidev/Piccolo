@@ -1,2 +1,7 @@
+# Build files
 /subprojects/blueprint-compiler
 target/
+
+# Translaton
+piccolo.pot
+po/*.po~
