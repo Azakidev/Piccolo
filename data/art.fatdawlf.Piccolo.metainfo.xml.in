@@ -66,6 +66,16 @@
     </screenshots>
 
     <releases>
+        <release version="0.3.1" date="2026-08-1">
+            <url type="details">https://github.com/Azakidev/Piccolo/releases/tag/0.3.1</url>
+            <description translate="no">
+                <p>Changelog:</p>
+                <ul>
+                    <li>Made the HSV sliders focusable with a keyboard</li>
+                    <li>Fixed the app icon not rendering correctly in QT based desktops and shells</li>
+                </ul>
+            </description>
+        </release>
         <release version="0.3.0" date="2026-07-29">
             <url type="details">https://github.com/Azakidev/Piccolo/releases/tag/0.3.0</url>
             <description translate="no">
