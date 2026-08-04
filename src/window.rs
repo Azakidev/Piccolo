@@ -14,7 +14,7 @@ use adw::{
 use angular_units::Deg;
 use ashpd::desktop::Color;
 use gettextrs::gettext;
-use gtk::gdk;
+use gtk::{Settings, gdk};
 use prisma::{FromColor, Hsv, Rgb};
 use std::{
     cell::RefCell,
@@ -108,6 +108,7 @@ mod imp {
                 obj.add_css_class("devel");
             }
 
+            obj.bind_controls_changed();
             obj.bind_sidebar_toggle();
             obj.bind_history_toggle();
             obj.bind_wheel();
@@ -136,6 +137,38 @@ impl PiccoloWindow {
 
     fn clear_focus(&self) {
         adw::prelude::GtkWindowExt::set_focus(self, None::<&gtk::Widget>);
+    }
+
+    fn bind_controls_changed(&self) {
+        if let Some(settings) = Settings::default() {
+            if let Some(layout) = settings.gtk_decoration_layout() {
+                self.adjust_layout(&layout);
+            }
+
+            settings.connect_gtk_decoration_layout_notify(glib::clone!(
+                #[weak(rename_to = obj)]
+                self,
+                move |settings| {
+                    if let Some(layout) = settings.gtk_decoration_layout() {
+                        obj.adjust_layout(&layout);
+                    }
+                }
+            ));
+        }
+    }
+
+    fn adjust_layout(&self, layout: &str) {
+        let has_minimize = layout.contains("minimize");
+        let has_maximize = layout.contains("maximize");
+        let has_icon = layout.contains("icon");
+
+        let padding = [has_maximize, has_minimize, has_icon]
+            .iter()
+            .filter(|c| **c)
+            .count() as i32
+            * 50;
+
+        self.set_width_request(330 + padding);
     }
 
     fn bind_sidebar_toggle(&self) {
