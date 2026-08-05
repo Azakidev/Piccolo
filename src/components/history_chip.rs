@@ -87,13 +87,6 @@ mod imp {
 
         fn constructed(&self) {
             self.parent_constructed();
-
-            let obj = self.obj();
-
-            obj.bind_color();
-            obj.setup_remove();
-            obj.setup_copy();
-            obj.setup_click();
         }
     }
 
@@ -116,6 +109,11 @@ impl PiccoloHistoryChip {
             .build();
 
         obj.set_labels(color);
+        obj.setup_copy(color);
+
+        obj.bind_color();
+        obj.setup_remove();
+        obj.setup_click();
 
         obj
     }
@@ -178,10 +176,10 @@ impl PiccoloHistoryChip {
         ));
     }
 
-    fn setup_copy(&self) {
+    fn setup_copy(&self, hsv: &Hsv<f32, Deg<f32>>) {
         let copy_button = &self.imp().copy_button;
-        let hsv = Hsv::new(Deg(self.h() % 360.), self.s(), self.v());
-        let rgb = Rgb::from_color(&hsv);
+
+        let rgb = Rgb::from_color(hsv);
         let rgb: Rgb<u8> = rgb.color_cast();
 
         let hex = format!("#{:02X}{:02X}{:02X}", rgb.red(), rgb.green(), rgb.blue());

@@ -66,6 +66,15 @@
     </screenshots>
 
     <releases>
+        <release version="0.3.3" date="TBD">
+            <url type="details">https://github.com/Azakidev/Piccolo/releases/tag/0.3.3</url>
+            <description translate="no">
+                <p>Changelog:</p>
+                <ul>
+                    <li>Fixed history chips not copying the correct color</li>
+                </ul>
+            </description>
+        </release>
         <release version="0.3.2" date="2026-08-4">
             <url type="details">https://github.com/Azakidev/Piccolo/releases/tag/0.3.2</url>
             <description translate="no">
