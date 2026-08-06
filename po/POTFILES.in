@@ -13,3 +13,4 @@ src/ui/shortcuts-dialog.blp
 src/ui/window.blp
 # Code
 src/window.rs
+src/application.rs

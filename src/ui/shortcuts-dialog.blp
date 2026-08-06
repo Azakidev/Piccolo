@@ -2,35 +2,45 @@ using Gtk 4.0;
 using Adw 1;
 
 Adw.ShortcutsDialog shortcuts_dialog {
-  Adw.ShortcutsSection {
-    title: _("Shortcuts");
+    Adw.ShortcutsSection {
+        title: _("Navigation");
 
-    Adw.ShortcutsItem {
-      title: C_("shortcut window", "Show Shortcuts");
-      action-name: "app.shortcuts";
+        Adw.ShortcutsItem {
+            title: C_("shortcut window", "Show Shortcuts");
+            action-name: "app.shortcuts";
+        }
+
+        Adw.ShortcutsItem {
+            title: C_("shortcut window", "Toggle the Sidebar");
+            action-name: "win.toggle-sidebar";
+            accelerator: "<Ctrl>S";
+        }
+
+        Adw.ShortcutsItem {
+            title: C_("shortcut window", "Toggle the History");
+            action-name: "win.toggle-history";
+            accelerator: "<Ctrl>H";
+        }
     }
 
-    Adw.ShortcutsItem {
-      title: C_("shortcut window", "Quit");
-      action-name: "app.quit";
-    }
+    Adw.ShortcutsSection {
+        title: _("Quick actions");
 
-    Adw.ShortcutsItem {
-      title: C_("shortcut window", "Pick a Color");
-      action-name: "win.pick-color";
-      accelerator: "P";
-    }
+        Adw.ShortcutsItem {
+            title: C_("shortcut window", "Quit");
+            action-name: "app.quit";
+        }
 
-    Adw.ShortcutsItem {
-      title: C_("shortcut window", "Toggle the Sidebar");
-      action-name: "win.toggle-sidebar";
-      accelerator: "<Ctrl>S";
-    }
+        Adw.ShortcutsItem {
+            title: C_("shortcut window", "Pick a Color");
+            action-name: "win.pick-color";
+            accelerator: "P";
+        }
 
-    Adw.ShortcutsItem {
-      title: C_("shortcut window", "Toggle the History");
-      action-name: "win.toggle-history";
-      accelerator: "<Ctrl>H";
+        Adw.ShortcutsItem {
+            title: C_("shortcut window", "Copy color");
+            action-name: "win.pick-color";
+            accelerator: "<Shift><Control>C";
+        }
     }
-  }
 }

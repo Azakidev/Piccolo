@@ -380,6 +380,19 @@ impl WindowAction {
                             }
                         }
                     });
+
+                    klass.add_binding(
+                        gdk::Key::C,
+                        gdk::ModifierType::SHIFT_MASK.union(gdk::ModifierType::CONTROL_MASK),
+                        move |win| {
+                            let _ = adw::prelude::WidgetExt::activate_action(
+                                win,
+                                &action,
+                                Some(&"".to_variant()),
+                            );
+                            glib::Propagation::Stop
+                        },
+                    );
                 }
                 Self::ColorPick => {
                     klass.install_action(&action, None, |win, _, _| {
