@@ -1,19 +1,18 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# Piccolo translation file.
+# Copyright (C) 2026
 # This file is distributed under the same license as the piccolo package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# AzzerTheProtoGoat <azzertheprotogoat@outlook.com>, 2026.
-# FatDawlf <zazaguichi@outlook.com>, 2026.
+# AzzerTheProtoGoat <>, 2026.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: piccolo\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-08-06 16:18+0200\n"
-"PO-Revision-Date: 2026-08-06 17:28+0200\n"
-"Last-Translator: FatDawlf <zazaguichi@outlook.com>\n"
-"Language-Team: Spanish\n"
-"Language: es\n"
+"POT-Creation-Date: 2026-08-06 16:46+0200\n"
+"PO-Revision-Date: 2026-08-06 17:42+0200\n"
+"Last-Translator: AzzerTheProtoGoat <>\n"
+"Language-Team: Polish\n"
+"Language: pl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -68,7 +67,7 @@ msgstr ""
 msgid "The main page in the mobile-friendly vertical format."
 msgstr "Strona główna w formacie pionowym wygodnym dla urządzeń mobilnych."
 
-#: src/ui/color-box.blp:26
+#: src/ui/color-box.blp:14
 msgid "Copy the color"
 msgstr "Kopiuj kolor"
 
