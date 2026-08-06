@@ -71,6 +71,8 @@
             <description translate="no">
                 <p>Changelog:</p>
                 <ul>
+                    <li>Added Polish translation</li>
+                    <li>Added keyboard shortcut for copying the active color (Control + Shift + C)</li>
                     <li>Fixed history chips not copying the correct color</li>
                 </ul>
             </description>
@@ -110,7 +112,8 @@
             <description translate="no">
                 <p>Changelog:</p>
                 <ul>
-                    <li>Fixed color functions and display not using the correct colors due to an issue with the underlying color library</li>
+                    <li>Fixed color functions and display not using the correct colors due to an
+                        issue with the underlying color library</li>
                     <li>Add XYZ-D65 color space to the color functions</li>
                 </ul>
             </description>
