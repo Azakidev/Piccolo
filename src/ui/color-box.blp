@@ -10,6 +10,10 @@ template $PiccoloColorBox: Button {
 
     accessible-role: button;
 
+    accessibility {
+        label: _("Copy the color");
+    }
+
     Box {
         orientation: horizontal;
         margin-top: 8;
@@ -23,7 +27,7 @@ template $PiccoloColorBox: Button {
             pixel-size: 24;
 
             accessibility {
-                label: _("Copy the color");
+              label: "";
             }
         }
 
