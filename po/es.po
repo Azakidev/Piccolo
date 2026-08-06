@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: piccolo\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-07-29 15:11+0200\n"
-"PO-Revision-Date: 2026-07-29 15:12+0200\n"
+"POT-Creation-Date: 2026-08-06 15:59+0200\n"
+"PO-Revision-Date: 2026-08-06 16:00+0200\n"
 "Last-Translator: FatDawlf <zazaguichi@outlook.com>\n"
 "Language-Team: Spanish\n"
 "Language: es\n"
@@ -72,29 +72,29 @@ msgstr "La página principal en su formato vertical compatible con móviles."
 msgid "Copy the color"
 msgstr "Copia el color"
 
-#: src/ui/color-selector.blp:22 src/ui/color-selector.blp:45
+#: src/ui/color-selector.blp:21 src/ui/color-selector.blp:44
 msgid "Hue"
 msgstr "Tono"
 
-#: src/ui/color-selector.blp:74 src/ui/color-selector.blp:96
+#: src/ui/color-selector.blp:72 src/ui/color-selector.blp:94
 msgid "Saturation"
 msgstr "Saturación"
 
-#: src/ui/color-selector.blp:125 src/ui/color-selector.blp:147
+#: src/ui/color-selector.blp:122 src/ui/color-selector.blp:144
 msgid "Value"
 msgstr "Valor"
 
-#: src/ui/color-selector.blp:178
+#: src/ui/color-selector.blp:175
 msgid "Hex code:"
 msgstr "Código hexadecimal:"
 
-#: src/ui/color-selector.blp:186
+#: src/ui/color-selector.blp:183
 msgid "Color hexadecimal code"
 msgstr "Código hexadecimal del color"
 
 #: src/ui/history.blp:30
 msgid "No colors have been yet picked."
-msgstr "No se ha seleccionado ningún color."
+msgstr "Aún no se ha seleccionado ningún color."
 
 #: src/ui/history-chip.blp:34
 msgid "Select color"
@@ -109,8 +109,8 @@ msgid "Remove chip"
 msgstr "Eliminar color"
 
 #: src/ui/shortcuts-dialog.blp:6
-msgid "Shortcuts"
-msgstr "Atajos de teclado"
+msgid "Navigation"
+msgstr "Navegación"
 
 #: src/ui/shortcuts-dialog.blp:9
 msgctxt "shortcut window"
@@ -119,23 +119,32 @@ msgstr "Mostrar Atajos de Teclado"
 
 #: src/ui/shortcuts-dialog.blp:14
 msgctxt "shortcut window"
+msgid "Toggle the Sidebar"
+msgstr "Alterna la Barra Lateral"
+
+#: src/ui/shortcuts-dialog.blp:20
+msgctxt "shortcut window"
+msgid "Toggle the History"
+msgstr "Alterna el Historial de Colores"
+
+#: src/ui/shortcuts-dialog.blp:27
+msgid "Quick actions"
+msgstr "Acciones rápidas"
+
+#: src/ui/shortcuts-dialog.blp:30
+msgctxt "shortcut window"
 msgid "Quit"
 msgstr "Cerrar"
 
-#: src/ui/shortcuts-dialog.blp:19
+#: src/ui/shortcuts-dialog.blp:35
 msgctxt "shortcut window"
 msgid "Pick a Color"
 msgstr "Selecciona un Color"
 
-#: src/ui/shortcuts-dialog.blp:25
+#: src/ui/shortcuts-dialog.blp:41
 msgctxt "shortcut window"
-msgid "Toggle the Sidebar"
-msgstr "Alterna la Barra Lateral"
-
-#: src/ui/shortcuts-dialog.blp:31
-msgctxt "shortcut window"
-msgid "Toggle the History"
-msgstr "Alterna el Historial de Colores"
+msgid "Copy color"
+msgstr "Copiar color"
 
 #: src/ui/window.blp:45
 msgid "Color formats"
@@ -169,13 +178,16 @@ msgstr "_Atajos de Teclado"
 msgid "_About Piccolo"
 msgstr "_Sobre Piccolo"
 
-#: src/window.rs:278
+#: src/window.rs:311
 msgid "Copied color"
 msgstr "Color copiado"
 
-#: src/window.rs:374
+#: src/window.rs:420
 msgid "Selected color"
 msgstr "Color seleccionado"
+
+#~ msgid "Shortcuts"
+#~ msgstr "Atajos de teclado"
 
 #~ msgctxt "shortcut window"
 #~ msgid "Pick a color"
