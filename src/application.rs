@@ -40,7 +40,7 @@ mod imp {
                 glib::Char::from(b'p'),
                 glib::OptionFlags::NONE,
                 glib::OptionArg::None,
-                "Pick a color upon launch",
+                &gettext("Pick a color upon launch"),
                 None,
             );
         }

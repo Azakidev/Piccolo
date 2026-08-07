@@ -72,6 +72,7 @@
                 <p>Changelog:</p>
                 <ul>
                     <li>Added Polish translation</li>
+                    <li>Added Brazilian Portuguese translation</li>
                     <li>Added keyboard shortcut for copying the active color (Control + Shift + C)</li>
                     <li>Fixed history chips not copying the correct color</li>
                 </ul>
