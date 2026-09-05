@@ -4,21 +4,20 @@ version = "0.3.3"
 edition = "2024"
 
 [dependencies]
+# Color
 prisma = { version = "0.1" }
 angular-units = { version = "0.2" }
 oklab = { version = "1.1" }
-ashpd = { version = "0.13", default-features = false, features = [
-    "gtk4",
-    "async-io",
-    "screenshot"
-]}
+
+# Utils
 strum = { version = "0.28", features = ["derive"] }
 struct_iterable = { version = "0.1" }
 
-gettext-rs = { version = "0.7", features = ["gettext-system"] }
 gtk = { version = "0.11", package = "gtk4", features = ["gnome_50"] }
-
-[dependencies.adw]
-package = "libadwaita"
-version = "0.9"
-features = ["v1_9"]
+adw = { package = "libadwaita", version = "0.9", features = ["v1_9"] }
+ashpd = { version = "0.13", default-features = false, features = [
+    "gtk4",
+    "async-io",
+    "screenshot",
+] }
+gettext-rs = { version = "0.8", features = ["gettext-system"] }
