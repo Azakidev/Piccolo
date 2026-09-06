@@ -57,7 +57,8 @@
         </screenshot>
         <screenshot xml:lang="en">
             <image>https://raw.githubusercontent.com/Azakidev/Piccolo/refs/heads/main/dist/ss/4.png</image>
-            <caption>The main page in it's most compact form, showing only the color wheel and top bar.</caption>
+            <caption>The main page in it's most compact form, showing only the color wheel and top
+                bar.</caption>
         </screenshot>
         <screenshot xml:lang="en">
             <image>https://raw.githubusercontent.com/Azakidev/Piccolo/refs/heads/main/dist/ss/5.png</image>
@@ -66,6 +67,16 @@
     </screenshots>
 
     <releases>
+        <release version="0.3.4" date="2026-09-6">
+            <url type="details">https://github.com/Azakidev/Piccolo/releases/tag/0.3.4</url>
+            <description translate="no">
+                <p>Changelog:</p>
+                <ul>
+                    <li>Fixed the icon for QT based systems and severely improved its rendering
+                        speed.</li>
+                </ul>
+            </description>
+        </release>
         <release version="0.3.3" date="2026-08-8">
             <url type="details">https://github.com/Azakidev/Piccolo/releases/tag/0.3.3</url>
             <description translate="no">
